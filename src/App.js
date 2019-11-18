@@ -26,7 +26,7 @@ class App extends Component {
       // get text selection
       let selection = utilities.getSelection();
 
-      if (selection && selection !== this.state.selectedText) {
+      if (selection) {
         this.setState({ selectedText: selection });
         console.log(this.state.selectedText);
 
@@ -41,6 +41,10 @@ class App extends Component {
           this.hideButton();
         }
       }
+
+      if (event.target.id !== "sanastorm-info-container") {
+        this.hideInfoContainer();
+      }
     };
   }
 
@@ -52,6 +56,10 @@ class App extends Component {
 
   showButton() {
     this.setState({ showButton: true });
+  }
+
+  hideInfoContainer() {
+    this.setState({ showInfoContainer: false });
   }
 
   setButtonCoordinates(x, y) {

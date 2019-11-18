@@ -9,13 +9,15 @@ const getSelection = () => {
 
 const getSelectionPosition = () => {
   const range = document.getSelection().getRangeAt(0);
-  const startOffset = range.startOffset;
-  const endOffset = startOffset + range.toString().length;
+  const domRect = range.getClientRects()[0];
 
-  console.log("[Utilities] offsets: ", startOffset, endOffset);
+  console.log("[Utilities] domRect: ", domRect);
+  console.log("[Utilities] offsets: ", domRect.left, domRect.bottom);
   return {
-    x: startOffset,
-    y: endOffset
+    x: domRect.left,
+    y: domRect.bottom,
+    width: domRect.width,
+    height: domRect.height
   };
 };
 
