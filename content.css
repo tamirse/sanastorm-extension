@@ -1,3 +1,5 @@
+/* Button */
+
 #sanastorm {
   background-color: rgb(245, 245, 245);
   box-sizing: content-box;
@@ -16,6 +18,36 @@
   width: 25px;
 }
 
+/* info container: */
+
 #sanastorm-info-container {
-  background-color: blueviolet;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px;
+  background-color: white;
+  z-index: 1201 !important;
+  border-width: 1px;
+  border-style: solid;
+  border-image: initial;
+  border-color: rgb(187, 187, 187) rgb(187, 187, 187) rgb(168, 168, 168);
+  padding: 16px;
+}
+
+.sanastorm-selection,
+.sanastorm-english {
+  margin: 4px 0;
+}
+
+.sanastorm-inflection {
+  display: flex;
+  margin: 4px 0;
+}
+
+.sanastorm-inflection-type {
+  width: 50%;
+  float: left;
+}
+
+.sanastorm-inflection-value {
+  width: 50%;
+  float: right;
+  /* text-align: end; */
 }

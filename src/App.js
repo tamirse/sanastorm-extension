@@ -10,7 +10,9 @@ class App extends Component {
     showInfoContainer: false,
     selectedText: "",
     buttonCoords: { x: 0, y: 0 },
-    infoContainerCoords: { x: 0, y: 0 }
+    infoContainerCoords: { x: 0, y: 0 },
+    wordData: null,
+    wordEnglish: null
   };
 
   constructor(props) {
@@ -26,7 +28,7 @@ class App extends Component {
       // get text selection
       let selection = utilities.getSelection();
 
-      if (selection) {
+      if (selection && !this.isTargetInfoContainer(event)) {
         this.setState({ selectedText: selection });
         console.log(this.state.selectedText);
 
@@ -42,7 +44,7 @@ class App extends Component {
         }
       }
 
-      if (event.target.id !== "sanastorm-info-container") {
+      if (!this.isTargetInfoContainer(event)) {
         this.hideInfoContainer();
       }
     };
@@ -60,6 +62,10 @@ class App extends Component {
 
   hideInfoContainer() {
     this.setState({ showInfoContainer: false });
+  }
+
+  isTargetInfoContainer(event) {
+    return event.target.classList.contains("sanastorm-ct");
   }
 
   setButtonCoordinates(x, y) {
@@ -87,13 +93,48 @@ class App extends Component {
     }, 25);
   }
 
+  getWordData() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log("FETCHING DATA!");
+        let dummyInflections = {
+          nominative: "huone",
+          genitive: "huoneen",
+          partitive: "huonetta",
+          inessive: "huonessa",
+          elative: "huoneesta",
+          illative: "huoneeseen",
+          adessive: "huoneella",
+          ablative: "huoneelta",
+          allative: "huoneelle",
+          essive: "huoneena",
+          translative: "huoneeksi",
+          instructive: null,
+          abessive: "huoneetta",
+          comitative: null
+        };
+        let dummyData = {
+          inflections: dummyInflections,
+          english: ["room", "house (dynasty)", "house(astrology)"]
+        };
+        resolve(dummyData);
+      }, 200);
+    });
+  }
+
   buttonClickedHandler() {
     let coords = utilities.getSelectionPosition();
 
-    this.setState({
-      showButton: false,
-      showInfoContainer: true,
-      infoContainerCoords: coords
+    this.getWordData().then(data => {
+      console.log(data);
+
+      this.setState({
+        showButton: false,
+        showInfoContainer: true,
+        infoContainerCoords: coords,
+        wordData: data.inflections,
+        wordEnglish: data.english
+      });
     });
   }
 
@@ -109,6 +150,8 @@ class App extends Component {
           show={this.state.showInfoContainer}
           coords={this.state.infoContainerCoords}
           selectedText={this.state.selectedText}
+          wordData={this.state.wordData}
+          wordEnglish={this.state.wordEnglish}
         />
       </Fragment>
     );

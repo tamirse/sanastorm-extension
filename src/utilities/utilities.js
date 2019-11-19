@@ -9,13 +9,14 @@ const getSelection = () => {
 
 const getSelectionPosition = () => {
   const range = document.getSelection().getRangeAt(0);
-  const domRect = range.getClientRects()[0];
+  const domRect = range.getClientRects()[0]; // contains the borders of the selection
 
-  console.log("[Utilities] domRect: ", domRect);
-  console.log("[Utilities] offsets: ", domRect.left, domRect.bottom);
+  // console.log("[Utilities] domRect: ", domRect);
+  // console.log("[Utilities] offsets: ", domRect.left, domRect.bottom);
+  // console.log("[Utilities] ScrollY: ", window.scrollY);
   return {
     x: domRect.left,
-    y: domRect.bottom,
+    y: domRect.bottom + window.scrollY,
     width: domRect.width,
     height: domRect.height
   };
