@@ -1,6 +1,7 @@
 import React from "react";
+import { Textfit } from "react-textfit"; // used for dynamic font size to fit container
 
-const WIDTH = 200;
+const WIDTH = 250;
 const HEIGHT = "auto";
 
 const INFO_CONTAINER_CLASS = "sanastorm-ct";
@@ -22,16 +23,25 @@ const infoContainer = props => {
         }}
       >
         <div id="sanastorm-text" className={INFO_CONTAINER_CLASS}>
-          <div className={`sanastorm-selection ${INFO_CONTAINER_CLASS}`}>
-            {props.selectedText}
+          <div className={`sanastorm-title ${INFO_CONTAINER_CLASS}`}>
+            <div className="sanastorm-finnish-title">FINNISH</div>
+            <div className="sanastorm-title-text">{props.selectedText}</div>
           </div>
           <div className={`sanastorm-english ${INFO_CONTAINER_CLASS}`}>
-            {props.wordEnglish.join(", ")}
+            <div className="sanastorm-english-title">ENGLISH</div>
+            <Textfit mode="single">{props.wordEnglish.join(", ")}</Textfit>
           </div>
           <hr></hr>
           <div id="sanastorm-inflections">
             {Object.keys(props.wordData).map((key, index) => (
-              <div className={`sanastorm-inflection ${key}`} key={key}>
+              <div
+                className={`sanastorm-inflection  ${key} ${
+                  props.wordData[key] === props.selectedText
+                    ? "sanastorm-selected"
+                    : ""
+                }`}
+                key={key}
+              >
                 <div className="sanastorm-inflection-type">{key}</div>
                 <div className="sanastorm-inflection-value">
                   {props.wordData[key] ? props.wordData[key] : "-"}

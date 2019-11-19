@@ -31,9 +31,32 @@
   padding: 16px;
 }
 
-.sanastorm-selection,
+#sanastorm-info-container hr {
+  margin: 12px 0;
+}
+
+.sanastorm-title {
+  padding-bottom: 5px;
+}
+
 .sanastorm-english {
-  margin: 4px 0;
+  padding: 5px 0;
+}
+
+.sanastorm-title-text {
+  font-size: 20px;
+}
+
+.sanastorm-english-title,
+.sanastorm-finnish-title {
+  color: #636363;
+  font-size: 11px;
+  margin: 0;
+  padding-bottom: 5px;
+}
+
+.sanastorm-selected {
+  font-weight: bold;
 }
 
 .sanastorm-inflection {
@@ -49,5 +72,4 @@
 .sanastorm-inflection-value {
   width: 50%;
   float: right;
-  /* text-align: end; */
 }
