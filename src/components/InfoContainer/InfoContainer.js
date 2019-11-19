@@ -5,6 +5,7 @@ const WIDTH = 250;
 const HEIGHT = "auto";
 
 const INFO_CONTAINER_CLASS = "sanastorm-ct";
+const NARROW_KEYS = ["nominative", "genitive", "partitive"];
 
 class InfoContainer extends Component {
   state = {
@@ -27,6 +28,28 @@ class InfoContainer extends Component {
     let container = null;
 
     if (this.props.show) {
+      let inflections = (
+        <div id="sanastorm-inflections">
+          {Object.keys(this.props.wordData).map((key, index) =>
+            this.state.expandedInflections || NARROW_KEYS.includes(key) ? (
+              <div
+                className={`sanastorm-inflection  ${key} ${
+                  this.props.wordData[key] === this.props.selectedText
+                    ? "sanastorm-selected"
+                    : ""
+                }`}
+                key={key}
+              >
+                <div className="sanastorm-inflection-type">{key}</div>
+                <div className="sanastorm-inflection-value">
+                  {this.props.wordData[key] ? this.props.wordData[key] : "-"}
+                </div>
+              </div>
+            ) : null
+          )}
+        </div>
+      );
+
       let expand = !this.state.expandedInflections ? (
         <div
           className={`sanastorm-expand ${INFO_CONTAINER_CLASS}`}
@@ -77,23 +100,7 @@ class InfoContainer extends Component {
               </Textfit>
             </div>
             <hr></hr>
-            <div id="sanastorm-inflections">
-              {Object.keys(this.props.wordData).map((key, index) => (
-                <div
-                  className={`sanastorm-inflection  ${key} ${
-                    this.props.wordData[key] === this.props.selectedText
-                      ? "sanastorm-selected"
-                      : ""
-                  }`}
-                  key={key}
-                >
-                  <div className="sanastorm-inflection-type">{key}</div>
-                  <div className="sanastorm-inflection-value">
-                    {this.props.wordData[key] ? this.props.wordData[key] : "-"}
-                  </div>
-                </div>
-              ))}
-            </div>
+            {inflections}
           </div>
           {expand}
         </div>
