@@ -73,3 +73,36 @@
   width: 50%;
   float: right;
 }
+
+.sanastorm-expand {
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+  cursor: pointer;
+}
+
+.sanastorm-expand-text {
+  color: #636363;
+  font-size: 10px;
+  margin: 0;
+  padding-right: 6px;
+}
+
+.sanastorm-arrow {
+  width: 0px;
+  height: 0px;
+  border: solid #636363;
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.sanastorm-arrow-more {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.sanastorm-arrow-less {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
