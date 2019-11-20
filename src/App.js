@@ -101,7 +101,7 @@ class App extends Component {
           nominative: "huone",
           genitive: "huoneen",
           partitive: "huonetta",
-          inessive: "huonessa",
+          inessive: "huoneessa",
           elative: "huoneesta",
           illative: "huoneeseen",
           adessive: "huoneella",

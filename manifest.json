@@ -16,8 +16,9 @@
   "icons": {
     "16": "images/finland16.png",
     "32": "images/finland32.png",
-    "64": "images/finland64.png"
+    "64": "images/finland64.png",
+    "128": "images/finland128.png"
   },
-  "web_accessible_resources": ["images/finland32.png"],
+  "web_accessible_resources": ["images/finland32.png", "images/wikt.png"],
   "manifest_version": 2
 }
