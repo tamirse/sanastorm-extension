@@ -32,7 +32,21 @@ class InfoContainer extends Component {
     }));
   }
 
+  getWordNominativeOrInfinitive() {
+    let word = null;
+    if (this.props.wordData) {
+      if ("nominative" in this.props.wordData) {
+        word = this.props.wordData.nominative;
+      } else if ("infinitive" in this.props.wordData) {
+        word = this.props.wordData.infinitive;
+      }
+    }
+    return word;
+  }
+
   render() {
+    let word = this.getWordNominativeOrInfinitive();
+
     let container = null;
 
     if (this.props.show) {
@@ -124,10 +138,7 @@ class InfoContainer extends Component {
             {expand}
             <a
               className={`sanastorm-wikt ${CONTAINER_CLASS}`}
-              href={
-                "https://en.wiktionary.org/wiki/" +
-                this.props.wordData.nominative
-              }
+              href={"https://en.wiktionary.org/wiki/" + word}
               target="_blank"
               rel="noopener noreferrer"
             >
