@@ -2,7 +2,7 @@
   "name": "Sanastorm",
   "version": "0.1",
   "description": "Get Finnish words info",
-  "permissions": ["activeTab", "https://*/"],
+  "permissions": ["activeTab", "webRequest", "*://*/"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
