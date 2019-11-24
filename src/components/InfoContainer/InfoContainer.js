@@ -127,8 +127,8 @@ class InfoContainer extends Component {
               <div className={`sanastorm-english-title ${CONTAINER_CLASS}`}>
                 ENGLISH
               </div>
-              <Textfit mode="single" className={CONTAINER_CLASS}>
-                {this.props.wordEnglish.join(", ")}
+              <Textfit max={20} className={CONTAINER_CLASS}>
+                {this.props.wordEnglish}
               </Textfit>
             </div>
             <hr className={CONTAINER_CLASS}></hr>

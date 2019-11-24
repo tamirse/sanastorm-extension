@@ -30,6 +30,8 @@
   /* border-image: initial; */
   border-color: rgb(187, 187, 187) rgb(187, 187, 187) rgb(168, 168, 168);
   padding: 16px;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  color: black;
 }
 #sanastorm-info-container::after,
 #sanastorm-info-container::before {
@@ -82,6 +84,10 @@
 
 .sanastorm-selected {
   font-weight: bold;
+}
+
+#sanastorm-inflections {
+  font-size: 16px;
 }
 
 .sanastorm-inflection {

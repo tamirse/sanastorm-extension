@@ -21,8 +21,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("Hei!");
-
     // bind functionality to document.onmouseup
     document.onmouseup = event => {
       // get text selection
@@ -30,7 +28,6 @@ class App extends Component {
 
       if (selection && !this.isTargetInfoContainer(event)) {
         this.setState({ selectedText: selection });
-        console.log(this.state.selectedText);
 
         if (
           selection &&
@@ -93,32 +90,22 @@ class App extends Component {
     }, 25);
   }
 
+  fetchResource(input, init) {
+    return new Promise((resolve, reject) => {
+      chrome.runtime.sendMessage({ input, init }, messageResponse => {
+        resolve(messageResponse);
+      });
+    });
+  }
+
   getWordData() {
     return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        console.log("FETCHING DATA!");
-        let dummyInflections = {
-          nominative: "huone",
-          genitive: "huoneen",
-          partitive: "huonetta",
-          inessive: "huoneessa",
-          elative: "huoneesta",
-          illative: "huoneeseen",
-          adessive: "huoneella",
-          ablative: "huoneelta",
-          allative: "huoneelle",
-          essive: "huoneena",
-          translative: "huoneeksi",
-          instructive: null,
-          abessive: "huoneetta",
-          comitative: null
-        };
-        let dummyData = {
-          inflections: dummyInflections,
-          english: ["room", "house (dynasty)", "house(astrology)"]
-        };
-        resolve(dummyData);
-      }, 200);
+      this.fetchResource(
+        `http://ec2-3-122-227-94.eu-central-1.compute.amazonaws.com:3000/api/sana/${this.state.selectedText}`
+      ).then(res => {
+        res = JSON.parse(res);
+        resolve(res);
+      });
     });
   }
 
@@ -126,14 +113,12 @@ class App extends Component {
     let coords = utilities.getSelectionPosition();
 
     this.getWordData().then(data => {
-      console.log(data);
-
       this.setState({
         showButton: false,
         showInfoContainer: true,
         infoContainerCoords: coords,
         wordData: data.inflections,
-        wordEnglish: data.english
+        wordEnglish: data.english.english
       });
     });
   }
