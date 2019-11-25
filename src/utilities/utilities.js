@@ -35,4 +35,13 @@ const isSelectionValid = selection => {
   return true;
 };
 
-export default { getSelection, getSelectionPosition, isSelectionValid };
+const csvToNewlines = string => {
+  return string.replace(/,/g, ",\n");
+};
+
+export default {
+  getSelection,
+  getSelectionPosition,
+  isSelectionValid,
+  csvToNewlines
+};

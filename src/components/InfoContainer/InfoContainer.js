@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Textfit } from "react-textfit"; // used for dynamic font size to fit container
+import utilities from "../../utilities/utilities";
 
 const WIDTH = 260;
 const HEIGHT = "auto";
@@ -68,7 +69,9 @@ class InfoContainer extends Component {
                 <div
                   className={`sanastorm-inflection-value ${CONTAINER_CLASS}`}
                 >
-                  {this.props.wordData[key] ? this.props.wordData[key] : "-"}
+                  {this.props.wordData[key]
+                    ? utilities.csvToNewlines(this.props.wordData[key])
+                    : "-"}
                 </div>
               </div>
             ) : null

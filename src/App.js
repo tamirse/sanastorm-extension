@@ -102,10 +102,26 @@ class App extends Component {
     return new Promise((resolve, reject) => {
       this.fetchResource(
         `http://ec2-3-122-227-94.eu-central-1.compute.amazonaws.com:3000/api/sana/${this.state.selectedText}`
-      ).then(res => {
-        res = JSON.parse(res);
-        resolve(res);
-      });
+      )
+        .then(res => {
+          if (res) {
+            res = JSON.parse(res);
+            resolve(res);
+          } else {
+            console.log(res);
+            res = {
+              inflections: {
+                Alert: "No data, sorry!",
+                Partitive: "No dataa, sorrya!"
+              },
+              english: {
+                english: "No data, sorry!"
+              }
+            };
+            resolve(res);
+          }
+        })
+        .catch(e => console.log(e));
     });
   }
 
