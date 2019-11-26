@@ -57,7 +57,8 @@ class InfoContainer extends Component {
             this.state.expandedInflections || NARROW_KEYS.includes(key) ? (
               <div
                 className={`sanastorm-inflection ${key} ${
-                  this.props.wordData[key] === this.props.selectedText
+                  this.props.wordData[key] ===
+                  this.props.selectedText.toLowerCase()
                     ? "sanastorm-selected"
                     : ""
                 } ${CONTAINER_CLASS}`}
