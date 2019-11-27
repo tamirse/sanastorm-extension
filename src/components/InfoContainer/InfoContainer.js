@@ -114,7 +114,7 @@ class InfoContainer extends Component {
               this.props.coords.x -
               Math.abs(WIDTH - this.props.coords.width) / 2,
             top: this.props.coords.y + 12,
-            width: WIDTH,
+            width: WIDTH + this.props.selectedText.length * 2,
             height: HEIGHT
           }}
         >
@@ -142,7 +142,10 @@ class InfoContainer extends Component {
             {expand}
             <a
               className={`sanastorm-wikt ${CONTAINER_CLASS}`}
-              href={"https://en.wiktionary.org/wiki/" + word}
+              href={
+                "https://en.wiktionary.org/wiki/" +
+                (word ? word : this.props.selectedText)
+              }
               target="_blank"
               rel="noopener noreferrer"
             >

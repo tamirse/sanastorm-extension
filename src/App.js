@@ -108,7 +108,6 @@ class App extends Component {
             res = JSON.parse(res);
             resolve(res);
           } else {
-            console.log(res);
             res = {
               inflections: {
                 Alert: "No data, sorry!",
