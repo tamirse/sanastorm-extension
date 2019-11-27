@@ -26,7 +26,7 @@ class App extends Component {
       // get text selection
       let selection = utilities.getSelection();
 
-      if (selection && !this.isTargetInfoContainer(event)) {
+      if (selection && !utilities.isTargetInfoContainer(event)) {
         this.setState({ selectedText: selection });
 
         if (
@@ -41,10 +41,13 @@ class App extends Component {
         }
       }
 
-      if (!this.isTargetInfoContainer(event)) {
+      if (!utilities.isTargetInfoContainer(event)) {
         this.hideInfoContainer();
       }
     };
+
+    // onmousedown
+    // if theres any selection
   }
 
   hideButton() {
@@ -59,10 +62,6 @@ class App extends Component {
 
   hideInfoContainer() {
     this.setState({ showInfoContainer: false });
-  }
-
-  isTargetInfoContainer(event) {
-    return event.target.classList.contains("sanastorm-ct");
   }
 
   setButtonCoordinates(x, y) {

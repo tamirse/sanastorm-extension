@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Textfit } from "react-textfit"; // used for dynamic font size to fit container
 import utilities from "../../utilities/utilities";
 
@@ -51,6 +51,27 @@ class InfoContainer extends Component {
     let container = null;
 
     if (this.props.show) {
+      let topArea = (
+        <Fragment>
+          <div className={`sanastorm-title ${CONTAINER_CLASS}`}>
+            <div className={`sanastorm-finnish-title ${CONTAINER_CLASS}`}>
+              FINNISH
+            </div>
+            <div className={`sanastorm-title-text ${CONTAINER_CLASS}`}>
+              {this.props.selectedText}
+            </div>
+          </div>
+          <div className={`sanastorm-english ${CONTAINER_CLASS}`}>
+            <div className={`sanastorm-english-title ${CONTAINER_CLASS}`}>
+              ENGLISH
+            </div>
+            <Textfit max={20} className={CONTAINER_CLASS}>
+              {this.props.wordEnglish}
+            </Textfit>
+          </div>
+        </Fragment>
+      );
+
       let inflections = (
         <div id="sanastorm-inflections">
           {Object.keys(this.props.wordData).map((key, index) =>
@@ -78,6 +99,24 @@ class InfoContainer extends Component {
             ) : null
           )}
         </div>
+      );
+
+      let wiktLink = (
+        <a
+          className={`sanastorm-wikt ${CONTAINER_CLASS}`}
+          href={
+            "https://en.wiktionary.org/wiki/" +
+            (word ? word : this.props.selectedText)
+          }
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            className={CONTAINER_CLASS}
+            src={chrome.runtime.getURL("images/wikt.png")}
+            alt="link to wiktionary"
+          ></img>
+        </a>
       );
 
       let expand = !this.state.expandedInflections ? (
@@ -119,42 +158,13 @@ class InfoContainer extends Component {
           }}
         >
           <div id="sanastorm-text" className={CONTAINER_CLASS}>
-            <div className={`sanastorm-title ${CONTAINER_CLASS}`}>
-              <div className={`sanastorm-finnish-title ${CONTAINER_CLASS}`}>
-                FINNISH
-              </div>
-              <div className={`sanastorm-title-text ${CONTAINER_CLASS}`}>
-                {this.props.selectedText}
-              </div>
-            </div>
-            <div className={`sanastorm-english ${CONTAINER_CLASS}`}>
-              <div className={`sanastorm-english-title ${CONTAINER_CLASS}`}>
-                ENGLISH
-              </div>
-              <Textfit max={20} className={CONTAINER_CLASS}>
-                {this.props.wordEnglish}
-              </Textfit>
-            </div>
+            {topArea}
             <hr className={CONTAINER_CLASS}></hr>
             {inflections}
           </div>
           <div className={`sanastorm-footer ${CONTAINER_CLASS}`}>
             {expand}
-            <a
-              className={`sanastorm-wikt ${CONTAINER_CLASS}`}
-              href={
-                "https://en.wiktionary.org/wiki/" +
-                (word ? word : this.props.selectedText)
-              }
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                className={CONTAINER_CLASS}
-                src={chrome.runtime.getURL("images/wikt.png")}
-                alt="link to wiktionary"
-              ></img>
-            </a>
+            {wiktLink}
           </div>
         </div>
       );
