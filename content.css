@@ -24,7 +24,7 @@
   box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px;
   position: relative;
   background: white;
-  z-index: 1201 !important;
+  z-index: 50000 !important;
   border-width: 1px;
   border-style: solid;
   /* border-image: initial; */

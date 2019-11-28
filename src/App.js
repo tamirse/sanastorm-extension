@@ -12,7 +12,8 @@ class App extends Component {
     buttonCoords: { x: 0, y: 0 },
     infoContainerCoords: { x: 0, y: 0 },
     wordData: null,
-    wordEnglish: null
+    wordEnglish: null,
+    partOfSpeech: null
   };
 
   constructor(props) {
@@ -123,6 +124,21 @@ class App extends Component {
     });
   }
 
+  getSelectedWordInflection() {
+    let selectedWordInflection = null;
+
+    Object.keys(this.state.wordData).forEach(inflection => {
+      if (
+        this.state.wordData[inflection] ===
+        this.state.selectedText.toLowerCase()
+      ) {
+        selectedWordInflection = inflection;
+      }
+    });
+
+    return selectedWordInflection;
+  }
+
   buttonClickedHandler() {
     let coords = utilities.getSelectionPosition();
 
@@ -132,7 +148,8 @@ class App extends Component {
         showInfoContainer: true,
         infoContainerCoords: coords,
         wordData: data.inflections,
-        wordEnglish: data.english.english
+        wordEnglish: data.english.english,
+        partOfSpeech: data.partOfSpeech
       });
     });
   }
@@ -140,18 +157,22 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <SanastormButton
-          show={this.state.showButton}
-          coords={this.state.buttonCoords}
-          clicked={this.buttonClickedHandler}
-        />
-        <SanastormInfoContainer
-          show={this.state.showInfoContainer}
-          coords={this.state.infoContainerCoords}
-          selectedText={this.state.selectedText}
-          wordData={this.state.wordData}
-          wordEnglish={this.state.wordEnglish}
-        />
+        {this.state.showButton ? (
+          <SanastormButton
+            coords={this.state.buttonCoords}
+            clicked={this.buttonClickedHandler}
+          />
+        ) : null}
+        {this.state.showInfoContainer ? (
+          <SanastormInfoContainer
+            coords={this.state.infoContainerCoords}
+            selectedText={this.state.selectedText}
+            wordData={this.state.wordData}
+            wordEnglish={this.state.wordEnglish}
+            partOfSpeech={this.state.partOfSpeech}
+            currentInflection={this.getSelectedWordInflection()}
+          />
+        ) : null}
       </Fragment>
     );
   }
