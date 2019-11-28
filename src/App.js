@@ -46,9 +46,6 @@ class App extends Component {
         this.hideInfoContainer();
       }
     };
-
-    // onmousedown
-    // if theres any selection
   }
 
   hideButton() {

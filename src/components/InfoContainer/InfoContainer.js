@@ -19,6 +19,28 @@ const MINIMAL_KEYS = [
   inflections.PASSIVE
 ];
 
+const EXPANDED_KEYS = [
+  inflections.NOMINATIVE,
+  inflections.GENITIVE,
+  inflections.PARTITIVE,
+  inflections.INESSIVE,
+  inflections.ELATIVE,
+  inflections.ILLATIVE,
+  inflections.ADESSIVE,
+  inflections.ABLATIVE,
+  inflections.ALLATIVE,
+  inflections.ESSIVE,
+  inflections.TRANSLATIVE,
+  inflections.ABESSIVE,
+  inflections.COMITATIVE,
+  inflections.INFINITIVE,
+  inflections.IMPERATIVE,
+  inflections.PASSIVE,
+  inflections.PRESENT_1ST_SINGULAR,
+  inflections.PAST_1ST_SINGULAR,
+  inflections.CONDITIONAL_1ST_SINGULAR
+];
+
 class InfoContainer extends Component {
   state = {
     expandedInflections: false
@@ -35,8 +57,25 @@ class InfoContainer extends Component {
     }));
   }
 
+  isVerb() {
+    return this.props.partOfSpeech === "verb";
+  }
+
+  calculateWidth() {
+    return (
+      WIDTH + this.props.selectedText.length * 2 + (this.isVerb() ? 90 : 0)
+    );
+  }
+
   render() {
     let word = utilities.getWordNominativeOrInfinitive(this.props.wordData);
+
+    let verbDescription = "";
+    if (this.isVerb()) {
+      verbDescription = inflections.verbCodeToDescription(
+        this.props.currentInflection
+      );
+    }
 
     let topArea = (
       <Fragment>
@@ -45,9 +84,7 @@ class InfoContainer extends Component {
             FINNISH
           </div>
           <div className={`sanastorm-title-text ${CONTAINER_CLASS}`}>
-            {this.props.partOfSpeech === "verb"
-              ? this.props.selectedText
-              : word}
+            {this.isVerb() ? this.props.selectedText : word}
           </div>
         </div>
         <div className={`sanastorm-english ${CONTAINER_CLASS}`}>
@@ -57,14 +94,20 @@ class InfoContainer extends Component {
           <Textfit max={20} className={CONTAINER_CLASS}>
             {this.props.wordEnglish}
           </Textfit>
+          {this.isVerb() ? (
+            <div className={`sanastorm-verb ${CONTAINER_CLASS}`}>
+              {verbDescription}
+            </div>
+          ) : null}
         </div>
       </Fragment>
     );
 
-    let inflections = (
+    let inflectionsArea = (
       <div id="sanastorm-inflections">
         {Object.keys(this.props.wordData).map(inflection =>
-          this.state.expandedInflections ||
+          (this.state.expandedInflections &&
+            EXPANDED_KEYS.includes(inflection)) ||
           MINIMAL_KEYS.includes(inflection) ? (
             <div
               className={`sanastorm-inflection ${inflection} ${
@@ -75,7 +118,9 @@ class InfoContainer extends Component {
               key={inflection}
             >
               <div className={`sanastorm-inflection-type ${CONTAINER_CLASS}`}>
-                {inflection}
+                {this.isVerb()
+                  ? inflections.verbCodeToDescription(inflection)
+                  : inflection}
               </div>
               <div className={`sanastorm-inflection-value ${CONTAINER_CLASS}`}>
                 {this.props.wordData[inflection]
@@ -137,16 +182,17 @@ class InfoContainer extends Component {
         style={{
           position: "absolute",
           left:
-            this.props.coords.x - Math.abs(WIDTH - this.props.coords.width) / 2,
+            this.props.coords.x -
+            Math.abs(this.calculateWidth() - this.props.coords.width) / 2,
           top: this.props.coords.y + 12,
-          width: WIDTH + this.props.selectedText.length * 2,
+          width: this.calculateWidth(),
           height: HEIGHT
         }}
       >
         <div id="sanastorm-text" className={CONTAINER_CLASS}>
           {topArea}
           <hr className={CONTAINER_CLASS}></hr>
-          {inflections}
+          {inflectionsArea}
         </div>
         <div className={`sanastorm-footer ${CONTAINER_CLASS}`}>
           {expand}
