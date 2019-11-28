@@ -1,3 +1,5 @@
+import * as inflections from "./inflections";
+
 const MAX_WORD_LEN = 61;
 
 /**
@@ -52,6 +54,24 @@ const isTargetInfoContainer = event => {
 };
 
 /**
+ * return the words' nominative or infinitive value
+ * @param {object} wordData
+ */
+const getWordNominativeOrInfinitive = wordData => {
+  let word = null;
+
+  if (wordData) {
+    if (inflections.NOMINATIVE in wordData) {
+      word = wordData.nominative;
+    } else if (inflections.INFINITIVE in wordData) {
+      word = wordData.infinitive;
+    }
+  }
+
+  return word;
+};
+
+/**
  * replaces commas with newlines
  * @param {string} string
  */
@@ -64,5 +84,6 @@ export default {
   getSelectionPosition,
   isSelectionValid,
   isTargetInfoContainer,
+  getWordNominativeOrInfinitive,
   csvToNewlines
 };

@@ -35,22 +35,8 @@ class InfoContainer extends Component {
     }));
   }
 
-  getWordNominativeOrInfinitive() {
-    let word = null;
-
-    if (this.props.wordData) {
-      if (inflections.NOMINATIVE in this.props.wordData) {
-        word = this.props.wordData.nominative;
-      } else if (inflections.INFINITIVE in this.props.wordData) {
-        word = this.props.wordData.infinitive;
-      }
-    }
-
-    return word;
-  }
-
   render() {
-    let word = this.getWordNominativeOrInfinitive();
+    let word = utilities.getWordNominativeOrInfinitive(this.props.wordData);
 
     let topArea = (
       <Fragment>
