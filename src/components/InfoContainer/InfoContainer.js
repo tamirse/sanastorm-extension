@@ -146,7 +146,7 @@ class InfoContainer extends Component {
         className={`sanastorm-wikt ${CONTAINER_CLASS}`}
         href={
           "https://en.wiktionary.org/wiki/" +
-          (word ? word : this.props.selectedText.toLower())
+          (word ? word : this.props.selectedText.toLowerCase())
         }
         target="_blank"
         rel="noopener noreferrer"

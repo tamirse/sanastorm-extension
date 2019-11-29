@@ -145,7 +145,7 @@ class App extends Component {
         showInfoContainer: true,
         infoContainerCoords: coords,
         wordData: data.inflections,
-        wordEnglish: data.english ? data.english : "-",
+        wordEnglish: data.english ? data.english.english : "-",
         partOfSpeech: data.partOfSpeech
       });
     });
