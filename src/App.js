@@ -110,9 +110,7 @@ class App extends Component {
                 Alert: "No data, sorry!",
                 Partitive: "No dataa, sorrya!"
               },
-              english: {
-                english: "No data, sorry!"
-              }
+              english: "No data, sorry!"
             };
             resolve(res);
           }
@@ -145,7 +143,7 @@ class App extends Component {
         showInfoContainer: true,
         infoContainerCoords: coords,
         wordData: data.inflections,
-        wordEnglish: data.english ? data.english.english : "-",
+        wordEnglish: data.english ? data.english : "-",
         partOfSpeech: data.partOfSpeech
       });
     });
