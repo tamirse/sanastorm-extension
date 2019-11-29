@@ -117,12 +117,20 @@ class InfoContainer extends Component {
               } ${CONTAINER_CLASS}`}
               key={inflection}
             >
-              <div className={`sanastorm-inflection-type ${CONTAINER_CLASS}`}>
+              <div
+                className={`sanastorm-inflection-type ${
+                  this.isVerb() ? "verb" : ""
+                } ${CONTAINER_CLASS}`}
+              >
                 {this.isVerb()
                   ? inflections.verbCodeToDescription(inflection)
                   : inflection}
               </div>
-              <div className={`sanastorm-inflection-value ${CONTAINER_CLASS}`}>
+              <div
+                className={`sanastorm-inflection-value ${
+                  this.isVerb() ? "verb" : ""
+                } ${CONTAINER_CLASS}`}
+              >
                 {this.props.wordData[inflection]
                   ? utilities.csvToNewlines(this.props.wordData[inflection])
                   : "-"}
@@ -138,7 +146,7 @@ class InfoContainer extends Component {
         className={`sanastorm-wikt ${CONTAINER_CLASS}`}
         href={
           "https://en.wiktionary.org/wiki/" +
-          (word ? word : this.props.selectedText)
+          (word ? word : this.props.selectedText.toLower())
         }
         target="_blank"
         rel="noopener noreferrer"
