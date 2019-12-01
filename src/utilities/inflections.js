@@ -98,6 +98,26 @@ export const verbCodeToDescription = code => {
   return codesObject[code];
 };
 
+export const nounCodeToDescription = code => {
+  const codesObject = {
+    pl_nominative: "nominative plur.",
+    pl_genitive: "genitive plur.",
+    pl_partitive: "partitive plur.",
+    pl_inessive: "inessive plur.",
+    pl_elative: "elative plur.",
+    pl_illative: "illative plur.",
+    pl_adessive: "adessive plur.",
+    pl_ablative: "ablative plur.",
+    pl_allative: "allative plur.",
+    pl_essive: "essive plur.",
+    pl_translative: "translative plur.",
+    pl_abessive: "abessive plur.",
+    pl_comitative: "comitative plur."
+  };
+
+  return codesObject[code];
+};
+
 export const MINIMAL_KEYS = [
   NOMINATIVE,
   GENITIVE,

@@ -29,6 +29,10 @@ class InfoContainer extends Component {
     return this.props.partOfSpeech === "verb";
   }
 
+  isNounPlural() {
+    return utilities.isNounPlural(this.props.selectedText, this.props.wordData);
+  }
+
   calculateWidth() {
     return (
       WIDTH + this.props.selectedText.length * 2 + (this.isVerb() ? 90 : 0)
@@ -38,11 +42,15 @@ class InfoContainer extends Component {
   render() {
     let word = utilities.getWordNominativeOrInfinitive(this.props.wordData);
 
-    let verbDescription = "";
+    let addedWordDescription = "";
     if (this.isVerb()) {
-      verbDescription = inflections.verbCodeToDescription(
+      addedWordDescription = inflections.verbCodeToDescription(
         this.props.currentInflection
       );
+    } else if (this.isNounPlural()) {
+      addedWordDescription = "plural";
+    } else {
+      addedWordDescription = "singular";
     }
 
     let topArea = (
@@ -52,7 +60,9 @@ class InfoContainer extends Component {
             FINNISH
           </div>
           <div className={`sanastorm-title-text ${CONTAINER_CLASS}`}>
-            {this.isVerb() ? this.props.selectedText : word}
+            {this.isVerb() || this.isNounPlural()
+              ? this.props.selectedText
+              : word}
           </div>
         </div>
         <div className={`sanastorm-english ${CONTAINER_CLASS}`}>
@@ -62,50 +72,68 @@ class InfoContainer extends Component {
           <Textfit max={20} className={CONTAINER_CLASS}>
             {this.props.wordEnglish}
           </Textfit>
-          {this.isVerb() ? (
+          {this.props.noData ? null : (
             <div className={`sanastorm-verb ${CONTAINER_CLASS}`}>
-              {verbDescription}
+              {addedWordDescription}
             </div>
-          ) : null}
+          )}
         </div>
       </Fragment>
     );
 
     let inflectionsArea = (
       <div id="sanastorm-inflections">
-        {Object.keys(this.props.wordData).map(inflection =>
-          (this.state.expandedInflections &&
-            inflections.EXPANDED_KEYS.includes(inflection)) ||
-          inflections.MINIMAL_KEYS.includes(inflection) ? (
-            <div
-              className={`sanastorm-inflection ${inflection} ${
-                inflection === this.props.currentInflection
-                  ? "sanastorm-selected"
-                  : ""
-              } ${CONTAINER_CLASS}`}
-              key={inflection}
-            >
+        {Object.keys(this.props.wordData).map(inflection => {
+          let isExpanded =
+            this.state.expandedInflections &&
+            inflections.EXPANDED_KEYS.includes(inflection);
+
+          let isInflectionInMinimalList = inflections.MINIMAL_KEYS.includes(
+            inflection
+          );
+
+          let inflectionName = inflection;
+          if (this.isNounPlural()) {
+            inflection = "pl_" + inflection;
+            inflectionName = inflections.nounCodeToDescription(inflection);
+          }
+
+          let inflectionRow = null;
+
+          if (isExpanded || isInflectionInMinimalList) {
+            inflectionRow = (
               <div
-                className={`sanastorm-inflection-type ${
-                  this.isVerb() ? "verb" : ""
+                className={`sanastorm-inflection ${inflection} ${
+                  inflection === this.props.currentInflection
+                    ? "sanastorm-selected"
+                    : ""
                 } ${CONTAINER_CLASS}`}
+                key={inflection}
               >
-                {this.isVerb()
-                  ? inflections.verbCodeToDescription(inflection)
-                  : inflection}
+                <div
+                  className={`sanastorm-inflection-type ${
+                    this.isVerb() ? "verb" : ""
+                  } ${CONTAINER_CLASS}`}
+                >
+                  {this.isVerb()
+                    ? inflections.verbCodeToDescription(inflection)
+                    : inflectionName}
+                </div>
+                <div
+                  className={`sanastorm-inflection-value ${
+                    this.isVerb() ? "verb" : ""
+                  } ${CONTAINER_CLASS}`}
+                >
+                  {this.props.wordData[inflection]
+                    ? utilities.csvToNewlines(this.props.wordData[inflection])
+                    : "-"}
+                </div>
               </div>
-              <div
-                className={`sanastorm-inflection-value ${
-                  this.isVerb() ? "verb" : ""
-                } ${CONTAINER_CLASS}`}
-              >
-                {this.props.wordData[inflection]
-                  ? utilities.csvToNewlines(this.props.wordData[inflection])
-                  : "-"}
-              </div>
-            </div>
-          ) : null
-        )}
+            );
+          }
+
+          return inflectionRow;
+        })}
       </div>
     );
 

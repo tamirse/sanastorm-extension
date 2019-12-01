@@ -116,6 +116,7 @@ class App extends Component {
         })
         .then(res => {
           if (res) {
+            console.log(res);
             res = JSON.parse(res);
             resolve(res);
           } else {
@@ -124,7 +125,8 @@ class App extends Component {
                 Alert: "No data, sorry!",
                 Partitive: "No dataa, sorrya!"
               },
-              english: "No data, sorry!"
+              english: "No data, sorry!",
+              noData: true
             };
             resolve(res);
           }
@@ -143,7 +145,8 @@ class App extends Component {
         infoContainerCoords: coords,
         wordData: data.inflections,
         wordEnglish: data.english ? data.english : "-",
-        partOfSpeech: data.partOfSpeech
+        partOfSpeech: data.partOfSpeech,
+        noData: data.noData
       });
     });
   }
@@ -168,6 +171,7 @@ class App extends Component {
               this.state.selectedText,
               this.state.wordData
             )}
+            noData={this.state.noData}
           />
         ) : null}
       </Fragment>

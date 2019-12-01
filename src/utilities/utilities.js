@@ -128,7 +128,11 @@ const getSelectedWordInflection = (selection, wordData) => {
  */
 const isNounPlural = (selection, wordData) => {
   let inflection = getSelectedWordInflection(selection, wordData);
-  return inflection(0, 2) === "pl";
+  if (inflection) {
+    return inflection.substr(0, 2) === "pl";
+  } else {
+    return false;
+  }
 };
 
 export default {
