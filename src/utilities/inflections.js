@@ -97,3 +97,35 @@ export const verbCodeToDescription = code => {
 
   return codesObject[code];
 };
+
+export const MINIMAL_KEYS = [
+  NOMINATIVE,
+  GENITIVE,
+  PARTITIVE,
+  ILLATIVE,
+  INFINITIVE, // verbs
+  IMPERATIVE,
+  PASSIVE
+];
+
+export const EXPANDED_KEYS = [
+  NOMINATIVE,
+  GENITIVE,
+  PARTITIVE,
+  INESSIVE,
+  ELATIVE,
+  ILLATIVE,
+  ADESSIVE,
+  ABLATIVE,
+  ALLATIVE,
+  ESSIVE,
+  TRANSLATIVE,
+  ABESSIVE,
+  COMITATIVE,
+  INFINITIVE, // verbs
+  IMPERATIVE,
+  PASSIVE,
+  PRESENT_1ST_SINGULAR,
+  PAST_1ST_SINGULAR,
+  CONDITIONAL_1ST_SINGULAR
+];

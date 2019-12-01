@@ -9,38 +9,6 @@ const HEIGHT = "auto";
 
 const CONTAINER_CLASS = "sanastorm-ct";
 
-const MINIMAL_KEYS = [
-  inflections.NOMINATIVE,
-  inflections.GENITIVE,
-  inflections.PARTITIVE,
-  inflections.ILLATIVE,
-  inflections.INFINITIVE,
-  inflections.IMPERATIVE,
-  inflections.PASSIVE
-];
-
-const EXPANDED_KEYS = [
-  inflections.NOMINATIVE,
-  inflections.GENITIVE,
-  inflections.PARTITIVE,
-  inflections.INESSIVE,
-  inflections.ELATIVE,
-  inflections.ILLATIVE,
-  inflections.ADESSIVE,
-  inflections.ABLATIVE,
-  inflections.ALLATIVE,
-  inflections.ESSIVE,
-  inflections.TRANSLATIVE,
-  inflections.ABESSIVE,
-  inflections.COMITATIVE,
-  inflections.INFINITIVE,
-  inflections.IMPERATIVE,
-  inflections.PASSIVE,
-  inflections.PRESENT_1ST_SINGULAR,
-  inflections.PAST_1ST_SINGULAR,
-  inflections.CONDITIONAL_1ST_SINGULAR
-];
-
 class InfoContainer extends Component {
   state = {
     expandedInflections: false
@@ -107,8 +75,8 @@ class InfoContainer extends Component {
       <div id="sanastorm-inflections">
         {Object.keys(this.props.wordData).map(inflection =>
           (this.state.expandedInflections &&
-            EXPANDED_KEYS.includes(inflection)) ||
-          MINIMAL_KEYS.includes(inflection) ? (
+            inflections.EXPANDED_KEYS.includes(inflection)) ||
+          inflections.MINIMAL_KEYS.includes(inflection) ? (
             <div
               className={`sanastorm-inflection ${inflection} ${
                 inflection === this.props.currentInflection

@@ -96,10 +96,24 @@ class App extends Component {
   }
 
   getWordData() {
+    let word = this.state.selectedText;
+    let baseURL =
+      "http://ec2-3-122-227-94.eu-central-1.compute.amazonaws.com:3000/api/sana/";
+
     return new Promise((resolve, reject) => {
-      this.fetchResource(
-        `http://ec2-3-122-227-94.eu-central-1.compute.amazonaws.com:3000/api/sana/${this.state.selectedText}`
-      )
+      this.fetchResource(baseURL + word)
+        .then(res => {
+          // no response, check if word has question suffix, remove it and try again
+          if (!res) {
+            word = utilities.removeQuestionSuffix(word); // try to remove question suffix
+            if (word !== this.state.selectedText) {
+              // if there was a suffix, try fetching again with modified word
+              return this.fetchResource(baseURL + word);
+            }
+          } else {
+            return res;
+          }
+        })
         .then(res => {
           if (res) {
             res = JSON.parse(res);
@@ -117,21 +131,6 @@ class App extends Component {
         })
         .catch(e => console.log(e));
     });
-  }
-
-  getSelectedWordInflection() {
-    let selectedWordInflection = null;
-
-    Object.keys(this.state.wordData).forEach(inflection => {
-      if (
-        this.state.wordData[inflection] ===
-        this.state.selectedText.toLowerCase()
-      ) {
-        selectedWordInflection = inflection;
-      }
-    });
-
-    return selectedWordInflection;
   }
 
   buttonClickedHandler() {
@@ -165,7 +164,10 @@ class App extends Component {
             wordData={this.state.wordData}
             wordEnglish={this.state.wordEnglish}
             partOfSpeech={this.state.partOfSpeech}
-            currentInflection={this.getSelectedWordInflection()}
+            currentInflection={utilities.getSelectedWordInflection(
+              this.state.selectedText,
+              this.state.wordData
+            )}
           />
         ) : null}
       </Fragment>
