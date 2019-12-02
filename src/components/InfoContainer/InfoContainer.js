@@ -33,7 +33,6 @@ class InfoContainer extends Component {
     this.setState((prev, props) => ({
       pluralToggled: !prev.pluralToggled
     }));
-    console.log("toggle plural", this.state.pluralToggled);
   }
 
   isVerb() {
@@ -109,7 +108,7 @@ class InfoContainer extends Component {
           let inflectionName = inflection;
           if (this.state.pluralToggled) {
             inflection = "pl_" + inflection;
-            inflectionName = inflections.nounCodeToDescription(inflection);
+            inflectionName = inflections.nounPlurCodeToDescription(inflection);
           }
 
           let inflectionRow = null;
