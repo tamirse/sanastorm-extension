@@ -59,6 +59,12 @@ class InfoContainer extends Component {
       addedWordDescription = "singular";
     }
 
+    let finnishDisplayWord = this.isVerb()
+      ? this.props.selectedText
+      : this.state.pluralToggled
+      ? this.props.wordData[inflections.NOMINATIVE_PLURAL]
+      : word;
+
     let topArea = (
       <Fragment>
         <div className={`sanastorm-title ${CONTAINER_CLASS}`}>
@@ -66,9 +72,7 @@ class InfoContainer extends Component {
             FINNISH
           </div>
           <div className={`sanastorm-title-text ${CONTAINER_CLASS}`}>
-            {this.isVerb() || this.state.pluralToggled
-              ? this.props.selectedText
-              : word}
+            {finnishDisplayWord}
           </div>
         </div>
         <div className={`sanastorm-english ${CONTAINER_CLASS}`}>
