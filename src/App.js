@@ -171,6 +171,10 @@ class App extends Component {
               this.state.wordData
             )}
             noData={this.state.noData}
+            isPlural={utilities.isNounPlural(
+              this.state.selectedText,
+              this.state.wordData
+            )}
           />
         ) : null}
       </Fragment>

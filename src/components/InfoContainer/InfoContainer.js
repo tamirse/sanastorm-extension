@@ -14,12 +14,13 @@ const CONTAINER_CLASS = "sanastorm-ct";
 class InfoContainer extends Component {
   state = {
     expandedInflections: false,
-    pluralToggled: false
+    pluralToggled: this.props.isPlural
   };
 
   constructor(props) {
     super(props);
     this.toggleInflections = this.toggleInflections.bind(this);
+    this.togglePlural = this.togglePlural.bind(this);
   }
 
   toggleInflections() {
@@ -32,14 +33,11 @@ class InfoContainer extends Component {
     this.setState((prev, props) => ({
       pluralToggled: !prev.pluralToggled
     }));
+    console.log("toggle plural", this.state.pluralToggled);
   }
 
   isVerb() {
     return this.props.partOfSpeech === "verb";
-  }
-
-  isNounPlural() {
-    return utilities.isNounPlural(this.props.selectedText, this.props.wordData);
   }
 
   calculateWidth() {
@@ -56,8 +54,7 @@ class InfoContainer extends Component {
       addedWordDescription = inflections.verbCodeToDescription(
         this.props.currentInflection
       );
-    } else if (this.isNounPlural()) {
-      this.togglePlural(); // toggle from singular to plural
+    } else if (this.state.pluralToggled) {
       addedWordDescription = "plural";
     } else {
       addedWordDescription = "singular";
@@ -70,7 +67,7 @@ class InfoContainer extends Component {
             FINNISH
           </div>
           <div className={`sanastorm-title-text ${CONTAINER_CLASS}`}>
-            {this.isVerb() || this.isNounPlural()
+            {this.isVerb() || this.state.pluralToggled
               ? this.props.selectedText
               : word}
           </div>
@@ -93,6 +90,13 @@ class InfoContainer extends Component {
 
     let inflectionsArea = (
       <div id="sanastorm-inflections">
+        {this.props.noData ? null : (
+          <ToggleSwitch
+            className="sanastorm-ct sanastorm-toggle"
+            changed={this.togglePlural}
+            checked={this.state.pluralToggled}
+          />
+        )}
         {Object.keys(this.props.wordData).map(inflection => {
           let isExpanded =
             this.state.expandedInflections &&
@@ -103,7 +107,7 @@ class InfoContainer extends Component {
           );
 
           let inflectionName = inflection;
-          if (this.isNounPlural()) {
+          if (this.state.pluralToggled) {
             inflection = "pl_" + inflection;
             inflectionName = inflections.nounCodeToDescription(inflection);
           }
@@ -205,7 +209,6 @@ class InfoContainer extends Component {
       >
         <div id="sanastorm-text" className={CONTAINER_CLASS}>
           {topArea}
-          <ToggleSwitch className="sanastorm-ct sanastorm-toggle" />
           <hr className={CONTAINER_CLASS}></hr>
           {inflectionsArea}
         </div>
