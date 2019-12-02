@@ -116,7 +116,6 @@ class App extends Component {
         })
         .then(res => {
           if (res) {
-            console.log(res);
             res = JSON.parse(res);
             resolve(res);
           } else {

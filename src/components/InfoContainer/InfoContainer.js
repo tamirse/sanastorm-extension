@@ -3,6 +3,7 @@ import { Textfit } from "react-textfit"; // used for dynamic font size to fit co
 
 import utilities from "../../utilities/utilities";
 import * as inflections from "../../utilities/inflections";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 const WIDTH = 260;
 const HEIGHT = "auto";
@@ -11,7 +12,8 @@ const CONTAINER_CLASS = "sanastorm-ct";
 
 class InfoContainer extends Component {
   state = {
-    expandedInflections: false
+    expandedInflections: false,
+    pluralToggled: false
   };
 
   constructor(props) {
@@ -22,6 +24,12 @@ class InfoContainer extends Component {
   toggleInflections() {
     this.setState((prev, props) => ({
       expandedInflections: !prev.expandedInflections
+    }));
+  }
+
+  togglePlural() {
+    this.setState((prev, props) => ({
+      pluralToggled: !prev.pluralToggled
     }));
   }
 
@@ -48,6 +56,7 @@ class InfoContainer extends Component {
         this.props.currentInflection
       );
     } else if (this.isNounPlural()) {
+      this.togglePlural(); // toggle from singular to plural
       addedWordDescription = "plural";
     } else {
       addedWordDescription = "singular";
@@ -195,6 +204,7 @@ class InfoContainer extends Component {
       >
         <div id="sanastorm-text" className={CONTAINER_CLASS}>
           {topArea}
+          <ToggleSwitch className="sanastorm-ct sanastorm-toggle" />
           <hr className={CONTAINER_CLASS}></hr>
           {inflectionsArea}
         </div>
