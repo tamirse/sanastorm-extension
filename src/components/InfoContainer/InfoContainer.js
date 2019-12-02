@@ -90,7 +90,7 @@ class InfoContainer extends Component {
 
     let inflectionsArea = (
       <div id="sanastorm-inflections">
-        {this.props.noData ? null : (
+        {this.props.noData || this.isVerb() ? null : (
           <ToggleSwitch
             className="sanastorm-ct sanastorm-toggle"
             changed={this.togglePlural}
