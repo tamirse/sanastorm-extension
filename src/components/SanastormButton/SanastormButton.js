@@ -1,4 +1,5 @@
 import React from "react";
+import "./SanastormButton.css";
 
 const LOGO_PATH = "images/finland32.png";
 

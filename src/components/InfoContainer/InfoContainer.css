@@ -1,0 +1,144 @@
+#sanastorm-info-container {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px;
+  position: relative;
+  background: white;
+  z-index: 50000 !important;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(187, 187, 187) rgb(187, 187, 187) rgb(168, 168, 168);
+  padding: 16px;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  color: black;
+}
+#sanastorm-info-container::after,
+#sanastorm-info-container::before {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+#sanastorm-info-container::after {
+  border-color: rgba(255, 255, 255, 0);
+  border-bottom-color: #ffffff;
+  border-width: 7px;
+  margin-left: -7px;
+}
+#sanastorm-info-container::before {
+  border-color: rgba(140, 140, 140, 0);
+  border-bottom-color: #8c8c8c;
+  border-width: 8px;
+  margin-left: -8px;
+}
+
+#sanastorm-info-container hr {
+  margin: 10px 0;
+}
+
+.sanastorm-title {
+  padding-bottom: 5px;
+}
+
+.sanastorm-english {
+  padding: 5px 0;
+}
+
+.sanastorm-verb {
+  background: lavender;
+  padding: 4px;
+  margin-top: 6px;
+  width: fit-content;
+}
+
+.sanastorm-title-text {
+  font-size: 20px;
+}
+
+.sanastorm-english-title,
+.sanastorm-finnish-title {
+  color: #636363;
+  font-size: 11px;
+  margin: 0;
+  padding-bottom: 5px;
+}
+
+.sanastorm-selected {
+  font-weight: bold;
+}
+
+#sanastorm-inflections {
+  font-size: 16px;
+}
+
+.sanastorm-inflection {
+  display: flex;
+  margin: 4px 0;
+}
+
+.sanastorm-inflection-type {
+  width: 50%;
+  float: left;
+}
+
+.sanastorm-inflection-value {
+  width: 50%;
+  float: right;
+}
+
+.sanastorm-inflection-type .verb {
+  width: 60%;
+  float: left;
+}
+
+.sanastorm-inflection-value .verb {
+  width: 40%;
+  float: right;
+}
+
+.sanastorm-footer {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.sanastorm-expand {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.sanastorm-expand-text {
+  color: #636363;
+  font-size: 10px;
+  margin: 0;
+  padding-right: 6px;
+}
+
+.sanastorm-arrow {
+  width: 0px;
+  height: 0px;
+  border: solid #636363;
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.sanastorm-arrow-more {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.sanastorm-arrow-less {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.sanastorm-wikt {
+  position: absolute;
+  right: 4%;
+  padding-top: 4%;
+}

@@ -4,6 +4,7 @@ import { Textfit } from "react-textfit"; // used for dynamic font size to fit co
 import utilities from "../../utilities/utilities";
 import * as inflections from "../../utilities/inflections";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import "./InfoContainer.css";
 
 const WIDTH = 260;
 const HEIGHT = "auto";
