@@ -22,6 +22,15 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // bind functionality to document.onmousedown
+    // if selection already exists when pressing mouse button, dont display sanastorm button
+    document.onmousedown = event => {
+      let selection = utilities.getSelection();
+      if (selection && !utilities.isTargetSanastormButton(event)) {
+        this.hideButton();
+      }
+    };
+
     // bind functionality to document.onmouseup
     document.onmouseup = event => {
       // get text selection
@@ -42,6 +51,7 @@ class App extends Component {
         }
       }
 
+      // if pressing outside of info container, hide it
       if (!utilities.isTargetInfoContainer(event)) {
         this.hideInfoContainer();
       }

@@ -54,6 +54,13 @@ const isTargetInfoContainer = event => {
 };
 
 /**
+ * return true iff target element is the sanastorm button
+ */
+const isTargetSanastormButton = event => {
+  return event.target.classList.contains("sanastorm-icon");
+};
+
+/**
  * return the words' nominative or infinitive value
  * @param {object} wordData
  */
@@ -140,6 +147,7 @@ export default {
   getSelectionPosition,
   isSelectionValid,
   isTargetInfoContainer,
+  isTargetSanastormButton,
   getWordNominativeOrInfinitive,
   csvToNewlines,
   isWordQuestionSuffix,
