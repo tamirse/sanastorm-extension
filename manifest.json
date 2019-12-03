@@ -1,8 +1,8 @@
 {
-  "name": "Sanastorm",
+  "name": "Sanastorm - Finnish Words Info",
   "version": "0.1",
-  "description": "Get Finnish words info",
-  "permissions": ["activeTab", "webRequest", "*://*/"],
+  "description": "Display Finnish words info",
+  "permissions": ["activeTab", "webRequest"],
   "background": {
     "scripts": ["./dist/background.js"],
     "persistent": true

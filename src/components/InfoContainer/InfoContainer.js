@@ -4,12 +4,11 @@ import { Textfit } from "react-textfit"; // used for dynamic font size to fit co
 import utilities from "../../utilities/utilities";
 import * as inflections from "../../utilities/inflections";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import WordDescription from "../WordDescription/WordDescription";
 import "./InfoContainer.css";
 
 const WIDTH = 260;
 const HEIGHT = "auto";
-
-const CONTAINER_CLASS = "sanastorm-ct";
 
 class InfoContainer extends Component {
   state = {
@@ -45,19 +44,47 @@ class InfoContainer extends Component {
     );
   }
 
+  createWordDescriptions() {
+    let descriptionText = "";
+    let classes = [];
+
+    // get verb description
+    if (this.isVerb()) {
+      return (
+        <Fragment>
+          <WordDescription description="verb" classes={["sanastorm-verb"]} />
+          <WordDescription
+            description={inflections.verbCodeToDescription(
+              this.props.currentInflection
+            )}
+            classes={["sanastorm-verb-description"]}
+          />
+        </Fragment>
+      );
+    }
+
+    // get non-verb description
+    if (this.state.pluralToggled) {
+      descriptionText = "plural";
+      classes.push("sanastorm-plural");
+    } else {
+      descriptionText = "singular";
+      classes.push("sanastorm-singular");
+    }
+
+    return (
+      <Fragment>
+        <WordDescription
+          description={this.props.currentInflection}
+          classes={["sanastorm-case"]}
+        />
+        <WordDescription description={descriptionText} classes={classes} />
+      </Fragment>
+    );
+  }
+
   render() {
     let word = utilities.getWordNominativeOrInfinitive(this.props.wordData);
-
-    let addedWordDescription = "";
-    if (this.isVerb()) {
-      addedWordDescription = inflections.verbCodeToDescription(
-        this.props.currentInflection
-      );
-    } else if (this.state.pluralToggled) {
-      addedWordDescription = "plural";
-    } else {
-      addedWordDescription = "singular";
-    }
 
     let finnishDisplayWord = this.isVerb()
       ? this.props.selectedText
@@ -67,24 +94,30 @@ class InfoContainer extends Component {
 
     let topArea = (
       <Fragment>
-        <div className={`sanastorm-title ${CONTAINER_CLASS}`}>
-          <div className={`sanastorm-finnish-title ${CONTAINER_CLASS}`}>
+        <div className={`sanastorm-title ${utilities.CONTAINER_CLASS}`}>
+          <div
+            className={`sanastorm-finnish-title ${utilities.CONTAINER_CLASS}`}
+          >
             FINNISH
           </div>
-          <div className={`sanastorm-title-text ${CONTAINER_CLASS}`}>
+          <div className={`sanastorm-title-text ${utilities.CONTAINER_CLASS}`}>
             {finnishDisplayWord}
           </div>
         </div>
-        <div className={`sanastorm-english ${CONTAINER_CLASS}`}>
-          <div className={`sanastorm-english-title ${CONTAINER_CLASS}`}>
+        <div className={`sanastorm-english ${utilities.CONTAINER_CLASS}`}>
+          <div
+            className={`sanastorm-english-title ${utilities.CONTAINER_CLASS}`}
+          >
             ENGLISH
           </div>
-          <Textfit max={20} className={CONTAINER_CLASS}>
+          <Textfit max={20} className={utilities.CONTAINER_CLASS}>
             {this.props.wordEnglish}
           </Textfit>
           {this.props.noData ? null : (
-            <div className={`sanastorm-verb ${CONTAINER_CLASS}`}>
-              {addedWordDescription}
+            <div
+              className={`sanastorm-word-descriptions ${utilities.CONTAINER_CLASS}`}
+            >
+              {this.createWordDescriptions()}
             </div>
           )}
         </div>
@@ -124,13 +157,13 @@ class InfoContainer extends Component {
                   inflection === this.props.currentInflection
                     ? "sanastorm-selected"
                     : ""
-                } ${CONTAINER_CLASS}`}
+                } ${utilities.CONTAINER_CLASS}`}
                 key={inflection}
               >
                 <div
                   className={`sanastorm-inflection-type ${
                     this.isVerb() ? "verb" : ""
-                  } ${CONTAINER_CLASS}`}
+                  } ${utilities.CONTAINER_CLASS}`}
                 >
                   {this.isVerb()
                     ? inflections.verbCodeToDescription(inflection)
@@ -139,7 +172,7 @@ class InfoContainer extends Component {
                 <div
                   className={`sanastorm-inflection-value ${
                     this.isVerb() ? "verb" : ""
-                  } ${CONTAINER_CLASS}`}
+                  } ${utilities.CONTAINER_CLASS}`}
                 >
                   {this.props.wordData[inflection]
                     ? utilities.csvToNewlines(this.props.wordData[inflection])
@@ -156,7 +189,7 @@ class InfoContainer extends Component {
 
     let wiktLink = (
       <a
-        className={`sanastorm-wikt ${CONTAINER_CLASS}`}
+        className={`sanastorm-wikt ${utilities.CONTAINER_CLASS}`}
         href={
           "https://en.wiktionary.org/wiki/" +
           (word ? word : this.props.selectedText.toLowerCase())
@@ -165,7 +198,7 @@ class InfoContainer extends Component {
         rel="noopener noreferrer"
       >
         <img
-          className={CONTAINER_CLASS}
+          className={utilities.CONTAINER_CLASS}
           src={chrome.runtime.getURL("images/wikt.png")}
           alt="link to wiktionary"
         ></img>
@@ -174,22 +207,26 @@ class InfoContainer extends Component {
 
     let expand = !this.state.expandedInflections ? (
       <div
-        className={`sanastorm-expand ${CONTAINER_CLASS}`}
+        className={`sanastorm-expand ${utilities.CONTAINER_CLASS}`}
         onClick={this.toggleInflections}
       >
-        <div className={`sanastorm-expand-text ${CONTAINER_CLASS}`}>MORE</div>
+        <div className={`sanastorm-expand-text ${utilities.CONTAINER_CLASS}`}>
+          MORE
+        </div>
         <div
-          className={`sanastorm-arrow sanastorm-arrow-more ${CONTAINER_CLASS}`}
+          className={`sanastorm-arrow sanastorm-arrow-more ${utilities.CONTAINER_CLASS}`}
         ></div>
       </div>
     ) : (
       <div
-        className={`sanastorm-expand ${CONTAINER_CLASS}`}
+        className={`sanastorm-expand ${utilities.CONTAINER_CLASS}`}
         onClick={this.toggleInflections}
       >
-        <div className={`sanastorm-expand-text ${CONTAINER_CLASS}`}>LESS</div>
+        <div className={`sanastorm-expand-text ${utilities.CONTAINER_CLASS}`}>
+          LESS
+        </div>
         <div
-          className={`sanastorm-arrow sanastorm-arrow-less ${CONTAINER_CLASS}`}
+          className={`sanastorm-arrow sanastorm-arrow-less ${utilities.CONTAINER_CLASS}`}
         ></div>
       </div>
     );
@@ -197,7 +234,7 @@ class InfoContainer extends Component {
     let container = (
       <div
         id="sanastorm-info-container"
-        className={`${CONTAINER_CLASS} ${
+        className={`${utilities.CONTAINER_CLASS} ${
           this.state.expandedInflections ? "expanded" : ""
         }`}
         style={{
@@ -210,12 +247,12 @@ class InfoContainer extends Component {
           height: HEIGHT
         }}
       >
-        <div id="sanastorm-text" className={CONTAINER_CLASS}>
+        <div id="sanastorm-text" className={utilities.CONTAINER_CLASS}>
           {topArea}
-          <hr className={CONTAINER_CLASS}></hr>
+          <hr className={utilities.CONTAINER_CLASS}></hr>
           {inflectionsArea}
         </div>
-        <div className={`sanastorm-footer ${CONTAINER_CLASS}`}>
+        <div className={`sanastorm-footer ${utilities.CONTAINER_CLASS}`}>
           {expand}
           {wiktLink}
         </div>

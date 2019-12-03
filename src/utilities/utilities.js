@@ -1,6 +1,7 @@
 import * as inflections from "./inflections";
 
 const MAX_WORD_LEN = 61;
+const CONTAINER_CLASS = "sanastorm-ct";
 
 /**
  * return page text selection as string
@@ -143,6 +144,7 @@ const isNounPlural = (selection, wordData) => {
 };
 
 export default {
+  CONTAINER_CLASS,
   getSelection,
   getSelectionPosition,
   isSelectionValid,

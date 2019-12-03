@@ -47,11 +47,8 @@
   padding: 5px 0;
 }
 
-.sanastorm-verb {
-  background: lavender;
-  padding: 4px;
-  margin-top: 6px;
-  width: fit-content;
+.sanastorm-word-descriptions {
+  display: flex;
 }
 
 .sanastorm-title-text {
