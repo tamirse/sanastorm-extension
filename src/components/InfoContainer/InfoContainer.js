@@ -120,19 +120,19 @@ class InfoContainer extends Component {
               {this.createWordDescriptions()}
             </div>
           )}
+          {this.props.noData || this.isVerb() ? null : (
+            <ToggleSwitch
+              className="sanastorm-ct sanastorm-toggle"
+              changed={this.togglePlural}
+              checked={this.state.pluralToggled}
+            />
+          )}
         </div>
       </Fragment>
     );
 
     let inflectionsArea = (
       <div id="sanastorm-inflections">
-        {this.props.noData || this.isVerb() ? null : (
-          <ToggleSwitch
-            className="sanastorm-ct sanastorm-toggle"
-            changed={this.togglePlural}
-            checked={this.state.pluralToggled}
-          />
-        )}
         {Object.keys(this.props.wordData).map(inflection => {
           let isExpanded =
             this.state.expandedInflections &&
