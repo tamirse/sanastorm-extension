@@ -1,6 +1,6 @@
 {
   "name": "Sanastorm - Finnish Words Info",
-  "version": "0.1",
+  "version": "0.1.1",
   "description": "Display Finnish words info",
   "permissions": ["activeTab", "webRequest"],
   "background": {
