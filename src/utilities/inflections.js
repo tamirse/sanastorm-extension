@@ -28,6 +28,10 @@ export const COMITATIVE_PLURAL = "pl_comitative";
 
 // VERBS
 export const INFINITIVE = "inf1";
+export const INFINITIVE_2 = "inf2";
+export const INFINITIVE_3 = "inf3";
+export const INFINITIVE_4 = "inf4";
+export const INFINITIVE_5 = "inf5";
 export const IMPERATIVE = "impr_2sg";
 export const PASSIVE = "pres_pass";
 export const PRESENT_1ST_SINGULAR = "pres_1sg";
@@ -141,6 +145,10 @@ export const EXPANDED_KEYS = {
   ],
   verbs: [
     INFINITIVE,
+    INFINITIVE_2,
+    INFINITIVE_3,
+    INFINITIVE_4,
+    INFINITIVE_5,
     IMPERATIVE,
     PASSIVE,
     PRESENT_1ST_SINGULAR,
