@@ -16,6 +16,9 @@ const inflectionArea = props => {
   return (
     <div id="sanastorm-inflections">
       {inflectionsListExpanded.map(inflection => {
+        // check if inflection is in minimal list
+        let isInMinimalList = inflectionsListMinimal.includes(inflection);
+
         // add plural to inflection name if plural is toggled
         let inflectionName = inflection;
         if (props.pluralToggled) {
@@ -26,10 +29,7 @@ const inflectionArea = props => {
         // component to display
         let inflectionRow = null;
 
-        if (
-          props.expandedInflections ||
-          inflectionsListMinimal.includes(inflection)
-        ) {
+        if (props.expandedInflections || isInMinimalList) {
           inflectionRow = (
             <div
               className={`sanastorm-inflection ${inflection} ${
