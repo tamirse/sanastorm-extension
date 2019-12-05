@@ -11,6 +11,7 @@ export const ALLATIVE = "allative";
 export const ESSIVE = "essive";
 export const TRANSLATIVE = "translative";
 export const ABESSIVE = "abessive";
+export const INSTRUCTIVE = "instructive";
 export const COMITATIVE = "comitative";
 export const NOMINATIVE_PLURAL = "pl_nominative";
 export const GENITIVE_PLURAL = "pl_genitive";
@@ -23,6 +24,7 @@ export const ABLATIVE_PLURAL = "pl_ablative";
 export const ALLATIVE_PLURAL = "pl_allative";
 export const ESSIVE_PLURAL = "pl_essive";
 export const TRANSLATIVE_PLURAL = "pl_translative";
+export const INSTRUCTIVE_PLURAL = "pl_instructive";
 export const ABESSIVE_PLURAL = "pl_abessive";
 export const COMITATIVE_PLURAL = "pl_comitative";
 
@@ -115,6 +117,7 @@ export const nounPlurCodeToDescription = code => {
     pl_allative: "allative plur.",
     pl_essive: "essive plur.",
     pl_translative: "translative plur.",
+    pl_instructive: "instructive plur.",
     pl_abessive: "abessive plur.",
     pl_comitative: "comitative plur."
   };
@@ -140,6 +143,7 @@ export const EXPANDED_KEYS = {
     ALLATIVE,
     ESSIVE,
     TRANSLATIVE,
+    INSTRUCTIVE,
     ABESSIVE,
     COMITATIVE
   ],
