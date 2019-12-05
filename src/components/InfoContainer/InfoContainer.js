@@ -4,7 +4,8 @@ import { Textfit } from "react-textfit"; // used for dynamic font size to fit co
 import utilities from "../../utilities/utilities";
 import * as inflections from "../../utilities/inflections";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import WordDescription from "../WordDescription/WordDescription";
+import WordDescription from "./WordDescription/WordDescription";
+import InflectionArea from "./InflectionsArea/InflectionArea";
 import "./InfoContainer.css";
 
 const WIDTH = 260;
@@ -131,67 +132,6 @@ class InfoContainer extends Component {
       </Fragment>
     );
 
-    let inflectionsListExpanded = this.isVerb()
-      ? inflections.EXPANDED_KEYS.verbs
-      : inflections.EXPANDED_KEYS.nouns;
-
-    let inflectionsListMinimal = this.isVerb()
-      ? inflections.MINIMAL_KEYS.verbs
-      : inflections.MINIMAL_KEYS.nouns;
-
-    let inflectionsArea = (
-      <div id="sanastorm-inflections">
-        {inflectionsListExpanded.map(inflection => {
-          // add plural to inflection name if plural is toggled
-          let inflectionName = inflection;
-          if (this.state.pluralToggled) {
-            inflection = "pl_" + inflection;
-            inflectionName = inflections.nounPlurCodeToDescription(inflection);
-          }
-
-          // component to display
-          let inflectionRow = null;
-
-          if (
-            this.state.expandedInflections ||
-            inflectionsListMinimal.includes(inflection)
-          ) {
-            inflectionRow = (
-              <div
-                className={`sanastorm-inflection ${inflection} ${
-                  inflection === this.props.currentInflection
-                    ? "sanastorm-selected"
-                    : ""
-                } ${utilities.CONTAINER_CLASS}`}
-                key={inflection}
-              >
-                <div
-                  className={`sanastorm-inflection-type ${
-                    this.isVerb() ? "verb" : ""
-                  } ${utilities.CONTAINER_CLASS}`}
-                >
-                  {this.isVerb()
-                    ? inflections.verbCodeToDescription(inflection)
-                    : inflectionName}
-                </div>
-                <div
-                  className={`sanastorm-inflection-value ${
-                    this.isVerb() ? "verb" : ""
-                  } ${utilities.CONTAINER_CLASS}`}
-                >
-                  {this.props.wordData[inflection]
-                    ? utilities.csvToNewlines(this.props.wordData[inflection])
-                    : "-"}
-                </div>
-              </div>
-            );
-          }
-
-          return inflectionRow;
-        })}
-      </div>
-    );
-
     let wiktLink = (
       <a
         className={`sanastorm-wikt ${utilities.CONTAINER_CLASS}`}
@@ -255,7 +195,13 @@ class InfoContainer extends Component {
         <div id="sanastorm-text" className={utilities.CONTAINER_CLASS}>
           {topArea}
           <hr className={utilities.CONTAINER_CLASS}></hr>
-          {inflectionsArea}
+          <InflectionArea
+            isVerb={this.isVerb()}
+            pluralToggled={this.state.pluralToggled}
+            expandedInflections={this.state.expandedInflections}
+            currentInflection={this.props.currentInflection}
+            wordData={this.props.wordData}
+          />
         </div>
         <div className={`sanastorm-footer ${utilities.CONTAINER_CLASS}`}>
           {expand}

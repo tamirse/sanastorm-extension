@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import "./WordDescription.css";
-import utilities from "../../utilities/utilities";
+import utilities from "../../../utilities/utilities";
 
 const wordDescription = props => {
   let classes = props.classes.toString().replace(/,/g, " ");
