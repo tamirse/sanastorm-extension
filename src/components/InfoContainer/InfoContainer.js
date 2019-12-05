@@ -131,26 +131,31 @@ class InfoContainer extends Component {
       </Fragment>
     );
 
+    let inflectionsListExpanded = this.isVerb()
+      ? inflections.EXPANDED_KEYS.verbs
+      : inflections.EXPANDED_KEYS.nouns;
+
+    let inflectionsListMinimal = this.isVerb()
+      ? inflections.MINIMAL_KEYS.verbs
+      : inflections.MINIMAL_KEYS.nouns;
+
     let inflectionsArea = (
       <div id="sanastorm-inflections">
-        {Object.keys(this.props.wordData).map(inflection => {
-          let isExpanded =
-            this.state.expandedInflections &&
-            inflections.EXPANDED_KEYS.includes(inflection);
-
-          let isInflectionInMinimalList = inflections.MINIMAL_KEYS.includes(
-            inflection
-          );
-
+        {inflectionsListExpanded.map(inflection => {
+          // add plural to inflection name if plural is toggled
           let inflectionName = inflection;
           if (this.state.pluralToggled) {
             inflection = "pl_" + inflection;
             inflectionName = inflections.nounPlurCodeToDescription(inflection);
           }
 
+          // component to display
           let inflectionRow = null;
 
-          if (isExpanded || isInflectionInMinimalList) {
+          if (
+            this.state.expandedInflections ||
+            inflectionsListMinimal.includes(inflection)
+          ) {
             inflectionRow = (
               <div
                 className={`sanastorm-inflection ${inflection} ${
