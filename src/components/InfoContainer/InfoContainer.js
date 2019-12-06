@@ -1,11 +1,8 @@
-import React, { Component, Fragment } from "react";
-import { Textfit } from "react-textfit"; // used for dynamic font size to fit container
+import React, { Component } from "react";
 
 import utilities from "../../utilities/utilities";
-import * as inflections from "../../utilities/inflections";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import WordDescription from "./WordDescription/WordDescription";
 import InflectionArea from "./InflectionsArea/InflectionArea";
+import TopArea from "./TopArea/TopArea";
 import "./InfoContainer.css";
 
 const WIDTH = 260;
@@ -17,23 +14,17 @@ class InfoContainer extends Component {
     pluralToggled: this.props.isPlural
   };
 
-  constructor(props) {
-    super(props);
-    this.toggleInflections = this.toggleInflections.bind(this);
-    this.togglePlural = this.togglePlural.bind(this);
-  }
-
-  toggleInflections() {
+  toggleInflections = () => {
     this.setState((prev, props) => ({
       expandedInflections: !prev.expandedInflections
     }));
-  }
+  };
 
-  togglePlural() {
+  togglePlural = () => {
     this.setState((prev, props) => ({
       pluralToggled: !prev.pluralToggled
     }));
-  }
+  };
 
   isVerb() {
     return this.props.partOfSpeech === "verb";
@@ -45,92 +36,8 @@ class InfoContainer extends Component {
     );
   }
 
-  createWordDescriptions() {
-    let descriptionText = "";
-    let classes = [];
-
-    // get verb description
-    if (this.isVerb()) {
-      return (
-        <Fragment>
-          <WordDescription description="verb" classes={["sanastorm-verb"]} />
-          <WordDescription
-            description={inflections.verbCodeToDescription(
-              this.props.currentInflection
-            )}
-            classes={["sanastorm-verb-description"]}
-          />
-        </Fragment>
-      );
-    }
-
-    // get non-verb description
-    if (this.state.pluralToggled) {
-      descriptionText = "plural";
-      classes.push("sanastorm-plural");
-    } else {
-      descriptionText = "singular";
-      classes.push("sanastorm-singular");
-    }
-
-    return (
-      <Fragment>
-        <WordDescription
-          description={this.props.currentInflection}
-          classes={["sanastorm-case"]}
-        />
-        <WordDescription description={descriptionText} classes={classes} />
-      </Fragment>
-    );
-  }
-
   render() {
     let word = utilities.getWordNominativeOrInfinitive(this.props.wordData);
-
-    let finnishDisplayWord = this.isVerb()
-      ? this.props.selectedText
-      : this.state.pluralToggled
-      ? this.props.wordData[inflections.NOMINATIVE_PLURAL]
-      : word;
-
-    let topArea = (
-      <Fragment>
-        <div className={`sanastorm-title ${utilities.CONTAINER_CLASS}`}>
-          <div
-            className={`sanastorm-finnish-title ${utilities.CONTAINER_CLASS}`}
-          >
-            FINNISH
-          </div>
-          <div className={`sanastorm-title-text ${utilities.CONTAINER_CLASS}`}>
-            {finnishDisplayWord}
-          </div>
-        </div>
-        <div className={`sanastorm-english ${utilities.CONTAINER_CLASS}`}>
-          <div
-            className={`sanastorm-english-title ${utilities.CONTAINER_CLASS}`}
-          >
-            ENGLISH
-          </div>
-          <Textfit max={20} className={utilities.CONTAINER_CLASS}>
-            {this.props.wordEnglish}
-          </Textfit>
-          {this.props.noData ? null : (
-            <div
-              className={`sanastorm-word-descriptions ${utilities.CONTAINER_CLASS}`}
-            >
-              {this.createWordDescriptions()}
-            </div>
-          )}
-          {this.props.noData || this.isVerb() ? null : (
-            <ToggleSwitch
-              className="sanastorm-ct sanastorm-toggle"
-              changed={this.togglePlural}
-              checked={this.state.pluralToggled}
-            />
-          )}
-        </div>
-      </Fragment>
-    );
 
     let wiktLink = (
       <a
@@ -193,15 +100,26 @@ class InfoContainer extends Component {
         }}
       >
         <div id="sanastorm-text" className={utilities.CONTAINER_CLASS}>
-          {topArea}
-          <hr className={utilities.CONTAINER_CLASS}></hr>
-          <InflectionArea
+          <TopArea
             isVerb={this.isVerb()}
             pluralToggled={this.state.pluralToggled}
-            expandedInflections={this.state.expandedInflections}
+            togglePlural={this.togglePlural}
             currentInflection={this.props.currentInflection}
             wordData={this.props.wordData}
+            selectedText={this.props.selectedText}
+            wordEnglish={this.props.wordEnglish}
+            noData={this.props.noData}
           />
+          <hr className={utilities.CONTAINER_CLASS}></hr>
+          {this.props.noData ? null : (
+            <InflectionArea
+              isVerb={this.isVerb()}
+              pluralToggled={this.state.pluralToggled}
+              expandedInflections={this.state.expandedInflections}
+              currentInflection={this.props.currentInflection}
+              wordData={this.props.wordData}
+            />
+          )}
         </div>
         <div className={`sanastorm-footer ${utilities.CONTAINER_CLASS}`}>
           {expand}

@@ -26,3 +26,7 @@
   width: 40%;
   float: right;
 }
+
+.sanastorm-selected {
+  font-weight: bold;
+}

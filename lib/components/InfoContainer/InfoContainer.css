@@ -39,34 +39,6 @@
   margin: 10px 0;
 }
 
-.sanastorm-title {
-  padding-bottom: 5px;
-}
-
-.sanastorm-english {
-  padding-top: 5px;
-}
-
-.sanastorm-word-descriptions {
-  display: flex;
-}
-
-.sanastorm-title-text {
-  font-size: 20px;
-}
-
-.sanastorm-english-title,
-.sanastorm-finnish-title {
-  color: #636363;
-  font-size: 11px;
-  margin: 0;
-  padding-bottom: 5px;
-}
-
-.sanastorm-selected {
-  font-weight: bold;
-}
-
 .sanastorm-footer {
   cursor: pointer;
   display: flex;

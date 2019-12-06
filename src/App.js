@@ -13,7 +13,8 @@ class App extends Component {
     infoContainerCoords: { x: 0, y: 0 },
     wordData: null,
     wordEnglish: null,
-    partOfSpeech: null
+    partOfSpeech: null,
+    noData: false
   };
 
   constructor(props) {
