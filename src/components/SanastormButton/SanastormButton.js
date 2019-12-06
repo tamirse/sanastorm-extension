@@ -7,7 +7,6 @@ const button = props => {
   let button = (
     <div
       id="sanastorm"
-      onClick={props.clicked}
       style={{
         position: "absolute",
         left: props.coords.x,

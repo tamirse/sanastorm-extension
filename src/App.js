@@ -17,18 +17,16 @@ class App extends Component {
     noData: false
   };
 
-  constructor(props) {
-    super(props);
-    this.buttonClickedHandler = this.buttonClickedHandler.bind(this);
-  }
-
   componentDidMount() {
     // bind functionality to document.onmousedown
     // if selection already exists when pressing mouse button, dont display sanastorm button
     document.onmousedown = event => {
       let selection = utilities.getSelection();
+
       if (selection && !utilities.isTargetSanastormButton(event)) {
         this.hideButton();
+      } else if (selection && utilities.isTargetSanastormButton(event)) {
+        this.buttonClickedHandler();
       }
     };
 
@@ -145,7 +143,7 @@ class App extends Component {
     });
   }
 
-  buttonClickedHandler() {
+  buttonClickedHandler = () => {
     let coords = utilities.getSelectionPosition();
 
     this.getWordData().then(data => {
@@ -159,16 +157,13 @@ class App extends Component {
         noData: data.noData
       });
     });
-  }
+  };
 
   render() {
     return (
       <Fragment>
         {this.state.showButton ? (
-          <SanastormButton
-            coords={this.state.buttonCoords}
-            clicked={this.buttonClickedHandler}
-          />
+          <SanastormButton coords={this.state.buttonCoords} />
         ) : null}
         {this.state.showInfoContainer ? (
           <SanastormInfoContainer
