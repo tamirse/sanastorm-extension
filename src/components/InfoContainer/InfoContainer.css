@@ -9,6 +9,7 @@
   padding: 16px;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   color: black;
+  line-height: 1.15;
 }
 #sanastorm-info-container::after,
 #sanastorm-info-container::before {

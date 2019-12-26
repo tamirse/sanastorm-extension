@@ -9,6 +9,7 @@ class App extends Component {
     showButton: false,
     showInfoContainer: false,
     selectedText: "",
+    selectedElement: null,
     buttonCoords: { x: 0, y: 0 },
     infoContainerCoords: { x: 0, y: 0 },
     wordData: null,
@@ -19,7 +20,7 @@ class App extends Component {
 
   componentDidMount() {
     // bind functionality to document.onmousedown
-    // if selection already exists when pressing mouse button, dont display sanastorm button
+    // if selection already exists when pressing mouse button, don't display sanastorm button
     document.onmousedown = event => {
       let selection = utilities.getSelection();
 
@@ -27,6 +28,8 @@ class App extends Component {
         this.hideButton();
       } else if (selection && utilities.isTargetSanastormButton(event)) {
         this.buttonClickedHandler();
+      } else if (!selection) {
+        this.hideButton();
       }
     };
 
@@ -34,9 +37,16 @@ class App extends Component {
     document.onmouseup = event => {
       // get text selection
       let selection = utilities.getSelection();
+      let selectedElement = utilities.getSelectedElement();
 
       if (selection && !utilities.isTargetInfoContainer(event)) {
-        this.setState({ selectedText: selection });
+        // we save the selection object
+        // because the selection may disappear, and we need to extract
+        // the selection position from the selection object
+        this.setState({
+          selectedText: selection,
+          selectedElement: selectedElement
+        });
 
         if (
           selection &&
@@ -144,7 +154,7 @@ class App extends Component {
   }
 
   buttonClickedHandler = () => {
-    let coords = utilities.getSelectionPosition();
+    let coords = utilities.getSelectionPosition(this.state.selectedElement);
 
     this.getWordData().then(data => {
       this.setState({

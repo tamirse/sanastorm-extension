@@ -1,9 +1,9 @@
 .sanastorm-description {
-  background: lavender;
   padding: 4px;
   margin-top: 6px;
   margin-right: 6px;
   width: fit-content;
+  font-size: 16px;
 }
 
 .sanastorm-singular,

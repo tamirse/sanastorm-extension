@@ -14,12 +14,19 @@ const getSelection = () => {
 };
 
 /**
+ * return the selected element object (not a string)
+ */
+const getSelectedElement = () => {
+  return document.getSelection();
+};
+
+/**
  * get text selection position on the page
  * x,y coordinates
  * selection width and height
  */
-const getSelectionPosition = () => {
-  const range = document.getSelection().getRangeAt(0);
+const getSelectionPosition = selectedElement => {
+  const range = selectedElement.getRangeAt(0);
   const domRect = range.getClientRects()[0]; // contains the borders of the selection
 
   return {
@@ -146,6 +153,7 @@ const isNounPlural = (selection, wordData) => {
 export default {
   CONTAINER_CLASS,
   getSelection,
+  getSelectedElement,
   getSelectionPosition,
   isSelectionValid,
   isTargetInfoContainer,
