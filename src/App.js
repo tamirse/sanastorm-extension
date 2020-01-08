@@ -116,8 +116,7 @@ class App extends Component {
 
   getWordData() {
     let word = this.state.selectedText;
-    let baseURL =
-      "http://ec2-3-122-227-94.eu-central-1.compute.amazonaws.com:3000/api/sana/";
+    let baseURL = "http://3.125.249.95:3000/api/sana/";
 
     return new Promise((resolve, reject) => {
       this.fetchResource(baseURL + word)
