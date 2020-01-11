@@ -1,7 +1,7 @@
 {
   "name": "Sanastorm - Finnish Words Info",
-  "version": "0.1.3",
-  "description": "Select Finnish words text to display information - Noun cases, Verb conjugations, Translations",
+  "version": "0.1.4",
+  "description": "Select Finnish words text to display information - Noun cases, Verb conjugations, English Translations",
   "permissions": ["activeTab", "webRequest"],
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "background": {

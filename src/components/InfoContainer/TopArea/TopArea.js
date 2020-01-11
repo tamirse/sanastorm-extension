@@ -12,36 +12,35 @@ class topArea extends Component {
     let descriptionText = "";
     let classes = [];
 
-    // get verb description
     if (this.props.isVerb) {
-      return (
-        <Fragment>
-          <WordDescription description="verb" classes={["sanastorm-verb"]} />
-          <WordDescription
-            description={inflections.verbCodeToDescription(
-              this.props.currentInflection
-            )}
-            classes={["sanastorm-verb-description"]}
-          />
-        </Fragment>
+      // get verb description
+      descriptionText = inflections.verbCodeToDescription(
+        this.props.currentInflection
       );
-    }
-
-    // get non-verb description
-    if (this.props.pluralToggled) {
-      descriptionText = "plural";
-      classes.push("sanastorm-plural");
+      classes = ["sanastorm-verb-description"];
     } else {
-      descriptionText = "singular";
-      classes.push("sanastorm-singular");
+      // get non-verb description
+      if (this.props.pluralToggled) {
+        descriptionText = "plural";
+        classes.push("sanastorm-plural");
+      } else {
+        descriptionText = "singular";
+        classes.push("sanastorm-singular");
+      }
     }
 
     return (
       <Fragment>
         <WordDescription
-          description={this.props.currentInflection}
-          classes={["sanastorm-case"]}
+          description={this.props.partOfSpeech}
+          classes={["sanastorm-pos"]}
         />
+        {this.props.isVerb ? null : (
+          <WordDescription
+            description={this.props.currentInflection}
+            classes={["sanastorm-case"]}
+          />
+        )}
         <WordDescription description={descriptionText} classes={classes} />
       </Fragment>
     );

@@ -27,7 +27,10 @@ class InfoContainer extends Component {
   };
 
   isVerb() {
-    return this.props.partOfSpeech === "verb";
+    return (
+      this.props.partOfSpeech === "verb" ||
+      this.props.partOfSpeech === "auxiliary verb"
+    );
   }
 
   calculateWidth() {
@@ -109,6 +112,7 @@ class InfoContainer extends Component {
             selectedText={this.props.selectedText}
             wordEnglish={this.props.wordEnglish}
             noData={this.props.noData}
+            partOfSpeech={this.props.partOfSpeech}
           />
           <hr className={utilities.CONTAINER_CLASS}></hr>
           {this.props.noData ? null : (

@@ -121,31 +121,24 @@ class App extends Component {
     return new Promise((resolve, reject) => {
       this.fetchResource(baseURL + word)
         .then(res => {
-          // no response, check if word has question suffix, remove it and try again
-          if (!res) {
-            word = utilities.removeQuestionSuffix(word); // try to remove question suffix
-            if (word !== this.state.selectedText) {
-              // if there was a suffix, try fetching again with modified word
-              return this.fetchResource(baseURL + word);
-            }
-          } else {
-            return res;
-          }
-        })
-        .then(res => {
+          let noDataResponse = {
+            inflections: {
+              Alert: "No data, sorry!",
+              Partitive: "No dataa, sorrya!"
+            },
+            english: "No data, sorry!",
+            noData: true
+          };
+
           if (res) {
             res = JSON.parse(res);
+            console.log(res);
+            if (Object.keys(res).length === 0) {
+              resolve(noDataResponse);
+            }
             resolve(res);
           } else {
-            res = {
-              inflections: {
-                Alert: "No data, sorry!",
-                Partitive: "No dataa, sorrya!"
-              },
-              english: "No data, sorry!",
-              noData: true
-            };
-            resolve(res);
+            resolve(noDataResponse);
           }
         })
         .catch(e => console.log(e));
@@ -156,13 +149,21 @@ class App extends Component {
     let coords = utilities.getSelectionPosition(this.state.selectedElement);
 
     this.getWordData().then(data => {
+      let partOfSpeech = data.partOfSpeech;
+
+      if (data["omorfi"] !== undefined) {
+        if (data["omorfi"]["UPOS"] !== undefined) {
+          partOfSpeech = data["omorfi"]["UPOS"];
+        }
+      }
+
       this.setState({
         showButton: false,
         showInfoContainer: true,
         infoContainerCoords: coords,
         wordData: data.inflections,
         wordEnglish: data.english ? data.english : "-",
-        partOfSpeech: data.partOfSpeech,
+        partOfSpeech: partOfSpeech,
         noData: data.noData
       });
     });
