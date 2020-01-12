@@ -57,6 +57,13 @@ class topArea extends Component {
 
     return (
       <Fragment>
+        {this.props.noData || this.props.isVerb ? null : (
+          <ToggleSwitch
+            className="sanastorm-ct sanastorm-toggle"
+            changed={this.props.togglePlural}
+            checked={this.props.pluralToggled}
+          />
+        )}
         <div className={`sanastorm-title ${utilities.CONTAINER_CLASS}`}>
           <div
             className={`sanastorm-finnish-title ${utilities.CONTAINER_CLASS}`}
@@ -76,21 +83,14 @@ class topArea extends Component {
           <Textfit max={20} className={utilities.CONTAINER_CLASS}>
             {this.props.wordEnglish}
           </Textfit>
-          {this.props.noData ? null : (
-            <div
-              className={`sanastorm-word-descriptions ${utilities.CONTAINER_CLASS}`}
-            >
-              {this.createWordDescriptions()}
-            </div>
-          )}
-          {this.props.noData || this.props.isVerb ? null : (
-            <ToggleSwitch
-              className="sanastorm-ct sanastorm-toggle"
-              changed={this.props.togglePlural}
-              checked={this.props.pluralToggled}
-            />
-          )}
         </div>
+        {this.props.noData ? null : (
+          <div
+            className={`sanastorm-word-descriptions ${utilities.CONTAINER_CLASS}`}
+          >
+            {this.createWordDescriptions()}
+          </div>
+        )}
       </Fragment>
     );
   }

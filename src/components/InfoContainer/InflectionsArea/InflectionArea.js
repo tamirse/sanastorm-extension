@@ -14,7 +14,7 @@ const inflectionArea = props => {
     : inflections.MINIMAL_KEYS.nouns;
 
   return (
-    <div id="sanastorm-inflections">
+    <div id="sanastorm-inflections" className={utilities.CONTAINER_CLASS}>
       {inflectionsListExpanded.map(inflection => {
         // check if inflection is in minimal list
         let isInMinimalList = inflectionsListMinimal.includes(inflection);

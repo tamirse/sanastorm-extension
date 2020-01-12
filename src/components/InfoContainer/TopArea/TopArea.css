@@ -8,6 +8,7 @@
 
 .sanastorm-word-descriptions {
   display: flex;
+  margin-top: 6px;
 }
 
 .sanastorm-title-text {
