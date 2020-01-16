@@ -1,0 +1,32 @@
+.sanastorm-expand-title {
+  cursor: pointer;
+  background: #e1eeff;
+  padding: 3px 6px;
+  margin: 3px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sanastorm-expand-title:hover {
+  background: #bfd7f6;
+}
+
+.sanastorm-arrow {
+  width: 0px;
+  height: 0px;
+  border: solid #636363;
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  padding: 3px;
+  margin: 5px;
+}
+
+.sanastorm-arrow-more {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.sanastorm-arrow-less {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}

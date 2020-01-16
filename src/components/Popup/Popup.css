@@ -1,0 +1,30 @@
+#sanastorm-popup {
+  width: 280px;
+}
+
+.popup-title {
+  padding: 1px;
+  background: #4a8de4;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 11px;
+}
+
+.sanastorm-options {
+  padding: 5px 0;
+}
+
+.verb-options {
+  margin-left: 10px;
+}
+
+.checkboxes {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 15px;
+}
+
+.tenses-misc {
+  margin: 7px 0;
+}

@@ -1436,6 +1436,135 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/components/Popup/Popup.css":
+/*!******************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/components/Popup/Popup.css ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+// Module
+exports.push([module.i, "#sanastorm-popup {\r\n  width: 280px;\r\n}\r\n\r\n.popup-title {\r\n  padding: 1px;\r\n  background: #4a8de4;\r\n  color: white;\r\n  text-align: center;\r\n  font-weight: bold;\r\n  font-size: 11px;\r\n}\r\n\r\n.sanastorm-options {\r\n  padding: 5px 0;\r\n}\r\n\r\n.verb-options {\r\n  margin-left: 10px;\r\n}\r\n\r\n.checkboxes {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  margin-right: 15px;\r\n}\r\n\r\n.tenses-misc {\r\n  margin: 7px 0;\r\n}\r\n", ""]);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/components/UI/Expand/Expand.css":
+/*!***********************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/components/UI/Expand/Expand.css ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+// Module
+exports.push([module.i, ".sanastorm-expand-title {\r\n  cursor: pointer;\r\n  background: #e1eeff;\r\n  padding: 3px 6px;\r\n  margin: 3px 0;\r\n  display: flex;\r\n  justify-content: space-between;\r\n}\r\n\r\n.sanastorm-expand-title:hover {\r\n  background: #bfd7f6;\r\n}\r\n\r\n.sanastorm-arrow {\r\n  width: 0px;\r\n  height: 0px;\r\n  border: solid #636363;\r\n  border-width: 0 1px 1px 0;\r\n  display: inline-block;\r\n  padding: 3px;\r\n  margin: 5px;\r\n}\r\n\r\n.sanastorm-arrow-more {\r\n  transform: rotate(45deg);\r\n  -webkit-transform: rotate(45deg);\r\n}\r\n\r\n.sanastorm-arrow-less {\r\n  transform: rotate(-135deg);\r\n  -webkit-transform: rotate(-135deg);\r\n}\r\n", ""]);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/runtime/api.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/api.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+// eslint-disable-next-line func-names
+module.exports = function (useSourceMap) {
+  var list = []; // return the list of modules as css string
+
+  list.toString = function toString() {
+    return this.map(function (item) {
+      var content = cssWithMappingToString(item, useSourceMap);
+
+      if (item[2]) {
+        return "@media ".concat(item[2], "{").concat(content, "}");
+      }
+
+      return content;
+    }).join('');
+  }; // import a list of modules into the list
+  // eslint-disable-next-line func-names
+
+
+  list.i = function (modules, mediaQuery) {
+    if (typeof modules === 'string') {
+      // eslint-disable-next-line no-param-reassign
+      modules = [[null, modules, '']];
+    }
+
+    var alreadyImportedModules = {};
+
+    for (var i = 0; i < this.length; i++) {
+      // eslint-disable-next-line prefer-destructuring
+      var id = this[i][0];
+
+      if (id != null) {
+        alreadyImportedModules[id] = true;
+      }
+    }
+
+    for (var _i = 0; _i < modules.length; _i++) {
+      var item = modules[_i]; // skip already imported module
+      // this implementation is not 100% perfect for weird media query combinations
+      // when a module is imported multiple times with different media queries.
+      // I hope this will never occur (Hey this way we have smaller bundles)
+
+      if (item[0] == null || !alreadyImportedModules[item[0]]) {
+        if (mediaQuery && !item[2]) {
+          item[2] = mediaQuery;
+        } else if (mediaQuery) {
+          item[2] = "(".concat(item[2], ") and (").concat(mediaQuery, ")");
+        }
+
+        list.push(item);
+      }
+    }
+  };
+
+  return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+  var content = item[1] || ''; // eslint-disable-next-line prefer-destructuring
+
+  var cssMapping = item[3];
+
+  if (!cssMapping) {
+    return content;
+  }
+
+  if (useSourceMap && typeof btoa === 'function') {
+    var sourceMapping = toComment(cssMapping);
+    var sourceURLs = cssMapping.sources.map(function (source) {
+      return "/*# sourceURL=".concat(cssMapping.sourceRoot).concat(source, " */");
+    });
+    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+  }
+
+  return [content].join('\n');
+} // Adapted from convert-source-map (MIT)
+
+
+function toComment(sourceMap) {
+  // eslint-disable-next-line no-undef
+  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+  var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
+  return "/*# ".concat(data, " */");
+}
+
+/***/ }),
+
 /***/ "./node_modules/object-assign/index.js":
 /*!*********************************************!*\
   !*** ./node_modules/object-assign/index.js ***!
@@ -33262,6 +33391,326 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var stylesInDom = {};
+
+var isOldIE = function isOldIE() {
+  var memo;
+  return function memorize() {
+    if (typeof memo === 'undefined') {
+      // Test for IE <= 9 as proposed by Browserhacks
+      // @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+      // Tests for existence of standard globals is to allow style-loader
+      // to operate correctly into non-standard environments
+      // @see https://github.com/webpack-contrib/style-loader/issues/177
+      memo = Boolean(window && document && document.all && !window.atob);
+    }
+
+    return memo;
+  };
+}();
+
+var getTarget = function getTarget() {
+  var memo = {};
+  return function memorize(target) {
+    if (typeof memo[target] === 'undefined') {
+      var styleTarget = document.querySelector(target); // Special case to return head of iframe instead of iframe itself
+
+      if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
+        try {
+          // This will throw an exception if access to iframe is blocked
+          // due to cross-origin restrictions
+          styleTarget = styleTarget.contentDocument.head;
+        } catch (e) {
+          // istanbul ignore next
+          styleTarget = null;
+        }
+      }
+
+      memo[target] = styleTarget;
+    }
+
+    return memo[target];
+  };
+}();
+
+function listToStyles(list, options) {
+  var styles = [];
+  var newStyles = {};
+
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i];
+    var id = options.base ? item[0] + options.base : item[0];
+    var css = item[1];
+    var media = item[2];
+    var sourceMap = item[3];
+    var part = {
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    };
+
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = {
+        id: id,
+        parts: [part]
+      });
+    } else {
+      newStyles[id].parts.push(part);
+    }
+  }
+
+  return styles;
+}
+
+function addStylesToDom(styles, options) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i];
+    var domStyle = stylesInDom[item.id];
+    var j = 0;
+
+    if (domStyle) {
+      domStyle.refs++;
+
+      for (; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j]);
+      }
+
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j], options));
+      }
+    } else {
+      var parts = [];
+
+      for (; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j], options));
+      }
+
+      stylesInDom[item.id] = {
+        id: item.id,
+        refs: 1,
+        parts: parts
+      };
+    }
+  }
+}
+
+function insertStyleElement(options) {
+  var style = document.createElement('style');
+
+  if (typeof options.attributes.nonce === 'undefined') {
+    var nonce =  true ? __webpack_require__.nc : undefined;
+
+    if (nonce) {
+      options.attributes.nonce = nonce;
+    }
+  }
+
+  Object.keys(options.attributes).forEach(function (key) {
+    style.setAttribute(key, options.attributes[key]);
+  });
+
+  if (typeof options.insert === 'function') {
+    options.insert(style);
+  } else {
+    var target = getTarget(options.insert || 'head');
+
+    if (!target) {
+      throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");
+    }
+
+    target.appendChild(style);
+  }
+
+  return style;
+}
+
+function removeStyleElement(style) {
+  // istanbul ignore if
+  if (style.parentNode === null) {
+    return false;
+  }
+
+  style.parentNode.removeChild(style);
+}
+/* istanbul ignore next  */
+
+
+var replaceText = function replaceText() {
+  var textStore = [];
+  return function replace(index, replacement) {
+    textStore[index] = replacement;
+    return textStore.filter(Boolean).join('\n');
+  };
+}();
+
+function applyToSingletonTag(style, index, remove, obj) {
+  var css = remove ? '' : obj.css; // For old IE
+
+  /* istanbul ignore if  */
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = replaceText(index, css);
+  } else {
+    var cssNode = document.createTextNode(css);
+    var childNodes = style.childNodes;
+
+    if (childNodes[index]) {
+      style.removeChild(childNodes[index]);
+    }
+
+    if (childNodes.length) {
+      style.insertBefore(cssNode, childNodes[index]);
+    } else {
+      style.appendChild(cssNode);
+    }
+  }
+}
+
+function applyToTag(style, options, obj) {
+  var css = obj.css;
+  var media = obj.media;
+  var sourceMap = obj.sourceMap;
+
+  if (media) {
+    style.setAttribute('media', media);
+  }
+
+  if (sourceMap && btoa) {
+    css += "\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))), " */");
+  } // For old IE
+
+  /* istanbul ignore if  */
+
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    while (style.firstChild) {
+      style.removeChild(style.firstChild);
+    }
+
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var singleton = null;
+var singletonCounter = 0;
+
+function addStyle(obj, options) {
+  var style;
+  var update;
+  var remove;
+
+  if (options.singleton) {
+    var styleIndex = singletonCounter++;
+    style = singleton || (singleton = insertStyleElement(options));
+    update = applyToSingletonTag.bind(null, style, styleIndex, false);
+    remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+  } else {
+    style = insertStyleElement(options);
+    update = applyToTag.bind(null, style, options);
+
+    remove = function remove() {
+      removeStyleElement(style);
+    };
+  }
+
+  update(obj);
+  return function updateStyle(newObj) {
+    if (newObj) {
+      if (newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap) {
+        return;
+      }
+
+      update(obj = newObj);
+    } else {
+      remove();
+    }
+  };
+}
+
+module.exports = function (list, options) {
+  options = options || {};
+  options.attributes = typeof options.attributes === 'object' ? options.attributes : {}; // Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+  // tags it will allow on a page
+
+  if (!options.singleton && typeof options.singleton !== 'boolean') {
+    options.singleton = isOldIE();
+  }
+
+  var styles = listToStyles(list, options);
+  addStylesToDom(styles, options);
+  return function update(newList) {
+    var mayRemove = [];
+
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i];
+      var domStyle = stylesInDom[item.id];
+
+      if (domStyle) {
+        domStyle.refs--;
+        mayRemove.push(domStyle);
+      }
+    }
+
+    if (newList) {
+      var newStyles = listToStyles(newList, options);
+      addStylesToDom(newStyles, options);
+    }
+
+    for (var _i = 0; _i < mayRemove.length; _i++) {
+      var _domStyle = mayRemove[_i];
+
+      if (_domStyle.refs === 0) {
+        for (var j = 0; j < _domStyle.parts.length; j++) {
+          _domStyle.parts[j]();
+        }
+
+        delete stylesInDom[_domStyle.id];
+      }
+    }
+  };
+};
+
+/***/ }),
+
+/***/ "./src/components/Popup/Popup.css":
+/*!****************************************!*\
+  !*** ./src/components/Popup/Popup.css ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!./Popup.css */ "./node_modules/css-loader/dist/cjs.js!./src/components/Popup/Popup.css");
+
+if (typeof content === 'string') {
+  content = [[module.i, content, '']];
+}
+
+var options = {}
+
+options.insert = "head";
+options.singleton = false;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js")(content, options);
+
+if (content.locals) {
+  module.exports = content.locals;
+}
+
+
+/***/ }),
+
 /***/ "./src/components/Popup/popup.js":
 /*!***************************************!*\
   !*** ./src/components/Popup/popup.js ***!
@@ -33275,17 +33724,499 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Popup_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Popup.css */ "./src/components/Popup/Popup.css");
+/* harmony import */ var _Popup_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_Popup_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _UI_Expand_Expand__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../UI/Expand/Expand */ "./src/components/UI/Expand/Expand.js");
+/* harmony import */ var _UI_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../UI/Checkbox/Checkbox */ "./src/components/UI/Checkbox/Checkbox.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
+
+
+
+
+chrome.storage.onChanged.addListener(function (changes, namespace) {
+  for (var key in changes) {
+    var storageChange = changes[key];
+    console.log('Storage key "%s" in namespace "%s" changed. ' + 'Old value was "%s", new value is "%s".', key, namespace, storageChange.oldValue, storageChange.newValue);
+  }
+});
 
 var Popup = function Popup(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "TESTING THE POPUP!!!!!");
-}; // render Popup in the popup container
-// this file is loaded in popup.html, that's how it recognizes 'document'
+  // add disable icon
+  // add all expands
+  // add 'return to default'
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.options),
+      _useState2 = _slicedToArray(_useState, 2),
+      options = _useState2[0],
+      setOptions = _useState2[1];
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "popup-title"
+  }, "SANASTORM"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sanastorm-options"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Expand_Expand__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: "Verb Display Options"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "verb-options"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Expand_Expand__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: "Tenses"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Present tense:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "checkboxes present-tense"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "tenses-singular"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "pres_1sg",
+    options: options,
+    setOptions: setOptions
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "pres_2sg",
+    options: options,
+    setOptions: setOptions
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "pres_3sg",
+    options: options,
+    setOptions: setOptions
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "tenses-plural"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "pres_1pl",
+    options: options,
+    setOptions: setOptions
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "pres_2pl",
+    options: options,
+    setOptions: setOptions
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "pres_3pl",
+    options: options,
+    setOptions: setOptions
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "tenses-misc"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "pres_neg",
+    options: options,
+    setOptions: setOptions
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "pres_pass",
+    options: options,
+    setOptions: setOptions
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "pres_pass_neg",
+    options: options,
+    setOptions: setOptions
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Past tense:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "checkboxes past-tense"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "tenses-singular"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "past_1sg",
+    options: options,
+    setOptions: setOptions
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "past_2sg",
+    options: options,
+    setOptions: setOptions
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "past_3sg",
+    options: options,
+    setOptions: setOptions
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "tenses-plural"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "past_1pl",
+    options: options,
+    setOptions: setOptions
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "past_2pl",
+    options: options,
+    setOptions: setOptions
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "past_3pl",
+    options: options,
+    setOptions: setOptions
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "tenses-misc"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Checkbox_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "past_pass",
+    options: options,
+    setOptions: setOptions
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Expand_Expand__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: "Conditional mood"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Expand_Expand__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: "Imperative mood"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Expand_Expand__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: "Potential mood"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Expand_Expand__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: "Participles"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Expand_Expand__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: "Infinitive"
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UI_Expand_Expand__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: "Non-Verb Display Options"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "test"))));
+};
+
+var defaultOptions = {
+  pres_1sg: true,
+  pres_2sg: false,
+  pres_3sg: false,
+  pres_1pl: false,
+  pres_2pl: false,
+  pres_3pl: false,
+  pres_neg: false,
+  pres_pass: false,
+  pres_pass_neg: false,
+  past_1sg: true,
+  past_2sg: false,
+  past_3sg: false,
+  past_1pl: false,
+  past_2pl: false,
+  past_3pl: false,
+  past_pass: false
+}; // load options and then render the popup
+
+chrome.storage.sync.get(defaultOptions, function (savedOptions) {
+  // render Popup in the popup container
+  // this file is loaded in popup.html, that's how it recognizes 'document'
+  var popupContainer = document.getElementById("sanastorm-popup");
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Popup, {
+    options: savedOptions
+  }), popupContainer);
+});
+
+/***/ }),
+
+/***/ "./src/components/UI/Checkbox/Checkbox.js":
+/*!************************************************!*\
+  !*** ./src/components/UI/Checkbox/Checkbox.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utilities_inflections__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utilities/inflections */ "./src/utilities/inflections.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
-var popupContainer = document.getElementById("sanastorm-popup");
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Popup, null), popupContainer);
+
+
+var Checkbox = function Checkbox(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.options[props.id]),
+      _useState2 = _slicedToArray(_useState, 2),
+      isChecked = _useState2[0],
+      setChecked = _useState2[1];
+
+  var id = props.id;
+
+  var changed = function changed() {
+    var updatedOptions = _objectSpread({}, props.options);
+
+    updatedOptions[id] = !isChecked; // store the state of checked in the chrome storage
+
+    chrome.storage.sync.set(_objectSpread({}, updatedOptions), function () {
+      console.log("Pressed checkbox, saving data: ", !isChecked);
+    });
+    props.setOptions(updatedOptions); // update the state of options (in popup component)
+
+    setChecked(function (previousIsChecked) {
+      return !previousIsChecked;
+    }); // update the state of checked
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "checkbox"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "checkbox",
+    id: id,
+    checked: isChecked,
+    onChange: changed
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: id
+  }, _utilities_inflections__WEBPACK_IMPORTED_MODULE_1__["verbCodeToDescription"](id)));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Checkbox);
+
+/***/ }),
+
+/***/ "./src/components/UI/Expand/Expand.css":
+/*!*********************************************!*\
+  !*** ./src/components/UI/Expand/Expand.css ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!./Expand.css */ "./node_modules/css-loader/dist/cjs.js!./src/components/UI/Expand/Expand.css");
+
+if (typeof content === 'string') {
+  content = [[module.i, content, '']];
+}
+
+var options = {}
+
+options.insert = "head";
+options.singleton = false;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js")(content, options);
+
+if (content.locals) {
+  module.exports = content.locals;
+}
+
+
+/***/ }),
+
+/***/ "./src/components/UI/Expand/Expand.js":
+/*!********************************************!*\
+  !*** ./src/components/UI/Expand/Expand.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Expand_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Expand.css */ "./src/components/UI/Expand/Expand.css");
+/* harmony import */ var _Expand_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Expand_css__WEBPACK_IMPORTED_MODULE_1__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+ // expand collapse ui
+
+var Expand = function Expand(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isExpanded = _useState2[0],
+      setIsExpanded = _useState2[1];
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "expand-area"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sanastorm-expand-title",
+    onClick: function onClick() {
+      return setIsExpanded(!isExpanded);
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sanastorm-expand-title-text"
+  }, props.title), isExpanded ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sanastorm-arrow sanastorm-arrow-less"
+  }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sanastorm-arrow sanastorm-arrow-more"
+  })), isExpanded ? props.children : null);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Expand);
+
+/***/ }),
+
+/***/ "./src/utilities/inflections.js":
+/*!**************************************!*\
+  !*** ./src/utilities/inflections.js ***!
+  \**************************************/
+/*! exports provided: NOMINATIVE, GENITIVE, PARTITIVE, INESSIVE, ELATIVE, ILLATIVE, ADESSIVE, ABLATIVE, ALLATIVE, ESSIVE, TRANSLATIVE, ABESSIVE, INSTRUCTIVE, COMITATIVE, NOMINATIVE_PLURAL, GENITIVE_PLURAL, PARTITIVE_PLURAL, INESSIVE_PLURAL, ELATIVE_PLURAL, ILLATIVE_PLURAL, ADESSIVE_PLURAL, ABLATIVE_PLURAL, ALLATIVE_PLURAL, ESSIVE_PLURAL, TRANSLATIVE_PLURAL, INSTRUCTIVE_PLURAL, ABESSIVE_PLURAL, COMITATIVE_PLURAL, INFINITIVE, INFINITIVE_2, INFINITIVE_3, INFINITIVE_4, INFINITIVE_5, IMPERATIVE, PASSIVE, PRESENT_1ST_SINGULAR, PAST_1ST_SINGULAR, CONDITIONAL_1ST_SINGULAR, verbCodeToDescription, nounPlurCodeToDescription, MINIMAL_KEYS, EXPANDED_KEYS */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NOMINATIVE", function() { return NOMINATIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GENITIVE", function() { return GENITIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PARTITIVE", function() { return PARTITIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INESSIVE", function() { return INESSIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ELATIVE", function() { return ELATIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ILLATIVE", function() { return ILLATIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADESSIVE", function() { return ADESSIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ABLATIVE", function() { return ABLATIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ALLATIVE", function() { return ALLATIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ESSIVE", function() { return ESSIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TRANSLATIVE", function() { return TRANSLATIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ABESSIVE", function() { return ABESSIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INSTRUCTIVE", function() { return INSTRUCTIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COMITATIVE", function() { return COMITATIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NOMINATIVE_PLURAL", function() { return NOMINATIVE_PLURAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GENITIVE_PLURAL", function() { return GENITIVE_PLURAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PARTITIVE_PLURAL", function() { return PARTITIVE_PLURAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INESSIVE_PLURAL", function() { return INESSIVE_PLURAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ELATIVE_PLURAL", function() { return ELATIVE_PLURAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ILLATIVE_PLURAL", function() { return ILLATIVE_PLURAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADESSIVE_PLURAL", function() { return ADESSIVE_PLURAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ABLATIVE_PLURAL", function() { return ABLATIVE_PLURAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ALLATIVE_PLURAL", function() { return ALLATIVE_PLURAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ESSIVE_PLURAL", function() { return ESSIVE_PLURAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TRANSLATIVE_PLURAL", function() { return TRANSLATIVE_PLURAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INSTRUCTIVE_PLURAL", function() { return INSTRUCTIVE_PLURAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ABESSIVE_PLURAL", function() { return ABESSIVE_PLURAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COMITATIVE_PLURAL", function() { return COMITATIVE_PLURAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INFINITIVE", function() { return INFINITIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INFINITIVE_2", function() { return INFINITIVE_2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INFINITIVE_3", function() { return INFINITIVE_3; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INFINITIVE_4", function() { return INFINITIVE_4; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INFINITIVE_5", function() { return INFINITIVE_5; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IMPERATIVE", function() { return IMPERATIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PASSIVE", function() { return PASSIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PRESENT_1ST_SINGULAR", function() { return PRESENT_1ST_SINGULAR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PAST_1ST_SINGULAR", function() { return PAST_1ST_SINGULAR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CONDITIONAL_1ST_SINGULAR", function() { return CONDITIONAL_1ST_SINGULAR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "verbCodeToDescription", function() { return verbCodeToDescription; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "nounPlurCodeToDescription", function() { return nounPlurCodeToDescription; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MINIMAL_KEYS", function() { return MINIMAL_KEYS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EXPANDED_KEYS", function() { return EXPANDED_KEYS; });
+// NON-VERBS
+var NOMINATIVE = "nominative";
+var GENITIVE = "genitive";
+var PARTITIVE = "partitive";
+var INESSIVE = "inessive";
+var ELATIVE = "elative";
+var ILLATIVE = "illative";
+var ADESSIVE = "adessive";
+var ABLATIVE = "ablative";
+var ALLATIVE = "allative";
+var ESSIVE = "essive";
+var TRANSLATIVE = "translative";
+var ABESSIVE = "abessive";
+var INSTRUCTIVE = "instructive";
+var COMITATIVE = "comitative";
+var NOMINATIVE_PLURAL = "pl_nominative";
+var GENITIVE_PLURAL = "pl_genitive";
+var PARTITIVE_PLURAL = "pl_partitive";
+var INESSIVE_PLURAL = "pl_inessive";
+var ELATIVE_PLURAL = "pl_elative";
+var ILLATIVE_PLURAL = "pl_illative";
+var ADESSIVE_PLURAL = "pl_adessive";
+var ABLATIVE_PLURAL = "pl_ablative";
+var ALLATIVE_PLURAL = "pl_allative";
+var ESSIVE_PLURAL = "pl_essive";
+var TRANSLATIVE_PLURAL = "pl_translative";
+var INSTRUCTIVE_PLURAL = "pl_instructive";
+var ABESSIVE_PLURAL = "pl_abessive";
+var COMITATIVE_PLURAL = "pl_comitative"; // VERBS
+
+var INFINITIVE = "inf1";
+var INFINITIVE_2 = "inf2";
+var INFINITIVE_3 = "inf3";
+var INFINITIVE_4 = "inf4";
+var INFINITIVE_5 = "inf5";
+var IMPERATIVE = "impr_2sg";
+var PASSIVE = "pres_pass";
+var PRESENT_1ST_SINGULAR = "pres_1sg";
+var PAST_1ST_SINGULAR = "past_1sg";
+var CONDITIONAL_1ST_SINGULAR = "cond_1sg";
+var verbCodes = {
+  pres_1sg: "present 1st sing.",
+  pres_2sg: "present 2nd sing.",
+  pres_3sg: "present 3rd sing.",
+  pres_1pl: "present 1st plur.",
+  pres_2pl: "present 2nd plur.",
+  pres_3pl: "present 3rd plur.",
+  pres_neg: "present neg.",
+  pres_pass: "present passive",
+  pres_pass_neg: "present passive neg.",
+  past_1sg: "past 1st sing.",
+  past_2sg: "past 2nd sing.",
+  past_3sg: "past 3rd sing.",
+  past_1pl: "past 1st plur.",
+  past_2pl: "past 2nd plur.",
+  past_3pl: "past 3rd plur.",
+  past_pass: "past passive",
+  cond_1sg: "conditional 1st sing.",
+  cond_2sg: "conditional 2nd sing.",
+  cond_3sg_or_neg: "conditional 3rd sing. / neg.",
+  cond_1pl: "conditional 1st plur.",
+  cond_2pl: "conditional 2nd plur.",
+  cond_3pl: "conditional 3rd plur.",
+  cond_pass: "conditional passive",
+  cond_pass_neg: "conditional passive neg.",
+  impr_2sg: "imperative 2nd sing.",
+  impr_3sg: "imperative 3rd sing.",
+  impr_1pl: "imperative 1st plur.",
+  impr_2pl: "imperative 2nd plur.",
+  impr_3pl: "imperative 3rd plur.",
+  impr_2sg_neg: "imperative 2nd sing. neg.",
+  impr_neg: "imperative neg.",
+  impr_pass: "imperative passive",
+  impr_pass_neg: "imperative passive neg.",
+  potn_1sg: "potential 1st sing.",
+  potn_2sg: "potential 2nd sing.",
+  potn_3sg: "potential 3rd sing.",
+  potn_1pl: "potential 1st plur.",
+  potn_2pl: "potential 2nd plur.",
+  potn_3pl: "potential 3rd plur.",
+  potn_neg: "potential neg.",
+  potn_pass: "potential passive",
+  potn_pass_neg: "potential passive neg.",
+  pres_part: "present participle",
+  pres_pass_part: "present passive participle",
+  past_part: "past participle",
+  past_pass_part: "past passive participle",
+  agnt_part: "agent participle",
+  nega_part: "neg. participle",
+  inf1: "infinitive",
+  inf1_long: "long infinitive",
+  inf2: "2nd infinitive",
+  inf2_pass: "2nd infinitive passive",
+  inf3: "3rd infinitive",
+  inf3_pass: "3rd infinitive passive",
+  inf4: "4th infinitive",
+  inf5: "5th infinitive",
+  jA: "ja"
+};
+var verbCodeToDescription = function verbCodeToDescription(code) {
+  return verbCodes[code];
+};
+var nounPlurCodeToDescription = function nounPlurCodeToDescription(code) {
+  var nounCodes = {
+    pl_nominative: "nominative plur.",
+    pl_genitive: "genitive plur.",
+    pl_partitive: "partitive plur.",
+    pl_inessive: "inessive plur.",
+    pl_elative: "elative plur.",
+    pl_illative: "illative plur.",
+    pl_adessive: "adessive plur.",
+    pl_ablative: "ablative plur.",
+    pl_allative: "allative plur.",
+    pl_essive: "essive plur.",
+    pl_translative: "translative plur.",
+    pl_instructive: "instructive plur.",
+    pl_abessive: "abessive plur.",
+    pl_comitative: "comitative plur."
+  };
+  return nounCodes[code];
+};
+var MINIMAL_KEYS = {
+  nouns: [NOMINATIVE, GENITIVE, PARTITIVE, ILLATIVE],
+  verbs: [INFINITIVE, IMPERATIVE, PASSIVE]
+};
+var EXPANDED_KEYS = {
+  nouns: [NOMINATIVE, GENITIVE, PARTITIVE, INESSIVE, ELATIVE, ILLATIVE, ADESSIVE, ABLATIVE, ALLATIVE, ESSIVE, TRANSLATIVE, INSTRUCTIVE, ABESSIVE, COMITATIVE],
+  verbs: [INFINITIVE, INFINITIVE_2, INFINITIVE_3, INFINITIVE_4, INFINITIVE_5, IMPERATIVE, PASSIVE, PRESENT_1ST_SINGULAR, PAST_1ST_SINGULAR, CONDITIONAL_1ST_SINGULAR]
+};
 
 /***/ })
 
