@@ -1,4 +1,4 @@
-// NOUNS
+// NON-VERBS
 export const NOMINATIVE = "nominative";
 export const GENITIVE = "genitive";
 export const PARTITIVE = "partitive";

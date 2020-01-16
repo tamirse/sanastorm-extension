@@ -40,7 +40,9 @@
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.0.5",
     "css-loader": "^3.2.1",
+    "html-loader": "^0.5.5",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-extension-reloader": "^1.1.4"
   }
 }
