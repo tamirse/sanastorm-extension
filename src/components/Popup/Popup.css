@@ -1,5 +1,5 @@
 #sanastorm-popup {
-  width: 280px;
+  width: 330px;
 }
 
 .popup-title {
@@ -17,14 +17,4 @@
 
 .verb-options {
   margin-left: 10px;
-}
-
-.checkboxes {
-  display: flex;
-  justify-content: space-between;
-  margin-right: 15px;
-}
-
-.tenses-misc {
-  margin: 7px 0;
 }

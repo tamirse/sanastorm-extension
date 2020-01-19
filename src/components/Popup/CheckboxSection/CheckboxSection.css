@@ -1,0 +1,9 @@
+.sing-plur {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+  }
+  
+  .section-misc {
+    margin: 7px 0;
+  }
