@@ -40,6 +40,9 @@ export const PRESENT_1ST_SINGULAR = "pres_1sg";
 export const PAST_1ST_SINGULAR = "past_1sg";
 export const CONDITIONAL_1ST_SINGULAR = "cond_1sg";
 
+/**
+ * Map object between verb form code to descriptive string
+ */
 const verbCodes = {
   pres_1sg: "present 1st sing.",
   pres_2sg: "present 2nd sing.",
@@ -100,11 +103,19 @@ const verbCodes = {
   jA: "ja"
 };
 
+/**
+ * Map between verb form code to descriptive string
+ * @param {string} code
+ */
 export const verbCodeToDescription = code => {
   return verbCodes[code];
 };
 
-export const nounPlurCodeToDescription = code => {
+/**
+ * Map between noun code to descriptive string
+ * @param {string} code
+ */
+export const nounCodeToDescription = code => {
   const nounCodes = {
     pl_nominative: "nominative plur.",
     pl_genitive: "genitive plur.",
@@ -132,6 +143,21 @@ export const nounPlurCodeToDescription = code => {
 export const MINIMAL_KEYS = {
   nouns: [NOMINATIVE, GENITIVE, PARTITIVE, ILLATIVE],
   verbs: [INFINITIVE, IMPERATIVE, PASSIVE]
+};
+
+export const getExpandedKeys = isVerb => {
+  const field = isVerb ? "verbs" : "nouns";
+
+  return new Promise((resolve, reject) => {
+    chrome.storage.sync.get(defaultOptions, savedOptions => {
+      try {
+        console.log(savedOptions[field]);
+        resolve(savedOptions[field]);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  });
 };
 
 export const EXPANDED_KEYS = {
@@ -163,4 +189,81 @@ export const EXPANDED_KEYS = {
     PAST_1ST_SINGULAR,
     CONDITIONAL_1ST_SINGULAR
   ]
+};
+
+export const defaultOptions = {
+  verbs: {
+    pres_1sg: true,
+    pres_2sg: false,
+    pres_3sg: false,
+    pres_1pl: false,
+    pres_2pl: false,
+    pres_3pl: false,
+    pres_neg: false,
+    pres_pass: false,
+    pres_pass_neg: false,
+    past_1sg: true,
+    past_2sg: false,
+    past_3sg: false,
+    past_1pl: false,
+    past_2pl: false,
+    past_3pl: false,
+    past_pass: false,
+    cond_1sg: false,
+    cond_2sg: false,
+    cond_3sg_or_neg: false,
+    cond_1pl: false,
+    cond_2pl: false,
+    cond_3pl: false,
+    cond_pass: false,
+    cond_pass_neg: false,
+    impr_2sg: false,
+    impr_3sg: false,
+    impr_1pl: false,
+    impr_2pl: false,
+    impr_3pl: false,
+    impr_2sg_neg: false,
+    impr_neg: false,
+    impr_pass: false,
+    impr_pass_neg: false,
+    potn_1sg: false,
+    potn_2sg: false,
+    potn_3sg: false,
+    potn_1pl: false,
+    potn_2pl: false,
+    potn_3pl: false,
+    potn_neg: false,
+    potn_pass: false,
+    potn_pass_neg: false,
+    pres_part: false,
+    pres_pass_part: false,
+    past_part: false,
+    past_pass_part: false,
+    agnt_part: false,
+    nega_part: false,
+    inf1: true,
+    inf1_long: false,
+    inf2: false,
+    inf2_pass: false,
+    inf3: false,
+    inf3_pass: false,
+    inf4: false,
+    inf5: false
+  },
+  nouns: {
+    nominative: true,
+    genitive: true,
+    partitive: true,
+    inessive: true,
+    elative: true,
+    illative: true,
+    adessive: true,
+    ablative: true,
+    allative: true,
+    essive: true,
+    translative: true,
+    abessive: true,
+    instructive: true,
+    comitative: true
+  }
 };

@@ -5,6 +5,8 @@ import * as inflections from "../../../utilities/inflections";
 import "./InflectionArea.css";
 
 const inflectionArea = props => {
+  console.log(inflections.getExpandedKeys(props.isVerb));
+
   let inflectionsListExpanded = props.isVerb
     ? inflections.EXPANDED_KEYS.verbs
     : inflections.EXPANDED_KEYS.nouns;
@@ -23,7 +25,7 @@ const inflectionArea = props => {
         let inflectionName = inflection;
         if (props.pluralToggled) {
           inflection = "pl_" + inflection;
-          inflectionName = inflections.nounPlurCodeToDescription(inflection);
+          inflectionName = inflections.nounCodeToDescription(inflection);
         }
 
         // component to display

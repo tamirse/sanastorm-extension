@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import * as inflections from "../../../utilities/inflections";
 
 const Checkbox = props => {
-  const [isChecked, setChecked] = useState(props.options[props.id]);
+  const field = props.isNoun ? "nouns" : "verbs";
+  const [isChecked, setChecked] = useState(props.options[field][props.id]);
   const id = props.id;
 
   const changed = () => {
     const updatedOptions = { ...props.options };
-    updatedOptions[id] = !isChecked;
+    updatedOptions[field][id] = !isChecked;
 
     // store the state of checked in the chrome storage
     chrome.storage.sync.set({ ...updatedOptions }, () => {
@@ -25,7 +26,7 @@ const Checkbox = props => {
       <input type="checkbox" id={id} checked={isChecked} onChange={changed} />
       <label htmlFor={id}>
         {props.isNoun
-          ? inflections.nounPlurCodeToDescription(id)
+          ? inflections.nounCodeToDescription(id)
           : inflections.verbCodeToDescription(id)}
       </label>
     </div>
