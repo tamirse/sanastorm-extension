@@ -23,7 +23,11 @@ const Checkbox = props => {
   return (
     <div className="checkbox">
       <input type="checkbox" id={id} checked={isChecked} onChange={changed} />
-      <label htmlFor={id}>{inflections.verbCodeToDescription(id)}</label>
+      <label htmlFor={id}>
+        {props.isNoun
+          ? inflections.nounPlurCodeToDescription(id)
+          : inflections.verbCodeToDescription(id)}
+      </label>
     </div>
   );
 };

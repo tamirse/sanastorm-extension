@@ -122,7 +122,11 @@ export const nounPlurCodeToDescription = code => {
     pl_comitative: "comitative plur."
   };
 
-  return nounCodes[code];
+  if (nounCodes.hasOwnProperty(code)) {
+    return nounCodes[code];
+  } else {
+    return code;
+  }
 };
 
 export const MINIMAL_KEYS = {

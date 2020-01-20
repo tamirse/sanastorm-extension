@@ -10,6 +10,7 @@ const CheckboxSection = props => {
       id={codeName}
       options={props.options}
       setOptions={props.setOptions}
+      isNoun={props.isNoun}
     />
   ));
 
@@ -19,6 +20,7 @@ const CheckboxSection = props => {
       id={codeName}
       options={props.options}
       setOptions={props.setOptions}
+      isNoun={props.isNoun}
     />
   ));
 
@@ -28,6 +30,7 @@ const CheckboxSection = props => {
       id={codeName}
       options={props.options}
       setOptions={props.setOptions}
+      isNoun={props.isNoun}
     />
   ));
 

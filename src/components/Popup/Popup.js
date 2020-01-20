@@ -101,7 +101,46 @@ const Popup = props => {
           </div>
         </Expand>
         <Expand title="Non-Verb Display Options">
-          <p>test</p>
+          <div className="non-verb-options">
+            <CheckboxSection
+              options={options}
+              setOptions={setOptions}
+              singCodes={[
+                "nominative",
+                "genitive",
+                "partitive",
+                "inessive",
+                "elative",
+                "illative",
+                "adessive",
+                "ablative",
+                "allative",
+                "essive",
+                "translative",
+                "abessive",
+                "instructive",
+                "comitative"
+              ]}
+              plurCodes={[
+                "pl_nominative",
+                "pl_genitive",
+                "pl_partitive",
+                "pl_inessive",
+                "pl_elative",
+                "pl_illative",
+                "pl_adessive",
+                "pl_ablative",
+                "pl_allative",
+                "pl_essive",
+                "pl_translative",
+                "pl_abessive",
+                "pl_instructive",
+                "pl_comitative"
+              ]}
+              miscCodes={[]}
+              isNoun={true}
+            />
+          </div>
         </Expand>
       </div>
     </Fragment>
@@ -164,7 +203,35 @@ const defaultOptions = {
   inf3: false,
   inf3_pass: false,
   inf4: false,
-  inf5: false
+  inf5: false,
+  nominative: true,
+  genitive: true,
+  partitive: true,
+  inessive: true,
+  elative: true,
+  illative: true,
+  adessive: true,
+  ablative: true,
+  allative: true,
+  essive: true,
+  translative: true,
+  abessive: true,
+  instructive: true,
+  comitative: true,
+  pl_nominative: true,
+  pl_genitive: true,
+  pl_partitive: true,
+  pl_inessive: true,
+  pl_elative: true,
+  pl_illative: true,
+  pl_adessive: true,
+  pl_ablative: true,
+  pl_allative: true,
+  pl_essive: true,
+  pl_translative: true,
+  pl_abessive: true,
+  pl_instructive: true,
+  pl_comitative: true
 };
 
 // load options and then render the popup
