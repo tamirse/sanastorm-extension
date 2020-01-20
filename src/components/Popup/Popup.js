@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import ReactDOM from "react-dom";
 
 import "./Popup.css";
 import Expand from "../UI/Expand/Expand";
-import Checkbox from "../UI/Checkbox/Checkbox";
 import CheckboxSection from "./CheckboxSection/CheckboxSection";
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
@@ -22,12 +21,11 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 
 const Popup = props => {
   // add disable icon
-  // add all expands
   // add 'return to default'
   const [options, setOptions] = useState(props.options);
 
   return (
-    <div>
+    <Fragment>
       <div className="popup-title">SANASTORM</div>
       <div className="sanastorm-options">
         <Expand title="Verb Display Options">
@@ -73,16 +71,40 @@ const Popup = props => {
                 ]}
               />
             </Expand>
-            <Expand title="Potential mood"></Expand>
-            <Expand title="Participles"></Expand>
-            <Expand title="Infinitive"></Expand>
+            <Expand title="Potential mood">
+              <CheckboxSection
+                options={options}
+                setOptions={setOptions}
+                singCodes={["potn_1sg", "potn_2sg", "potn_3sg"]}
+                plurCodes={["potn_1pl", "potn_2pl", "potn_3pl"]}
+                miscCodes={["potn_neg", "potn_pass", "potn_pass_neg"]}
+              />
+            </Expand>
+            <Expand title="Participles">
+              <CheckboxSection
+                options={options}
+                setOptions={setOptions}
+                singCodes={["pres_part", "past_part", "agnt_part", "nega_part"]}
+                plurCodes={["pres_pass_part", "past_pass_part"]}
+                miscCodes={[]}
+              />
+            </Expand>
+            <Expand title="Infinitive">
+              <CheckboxSection
+                options={options}
+                setOptions={setOptions}
+                singCodes={["inf1", "inf2", "inf3", "inf4", "inf5"]}
+                plurCodes={["inf1_long", "inf2_pass", "inf3_pass"]}
+                miscCodes={[]}
+              />
+            </Expand>
           </div>
         </Expand>
         <Expand title="Non-Verb Display Options">
           <p>test</p>
         </Expand>
       </div>
-    </div>
+    </Fragment>
   );
 };
 
@@ -119,7 +141,30 @@ const defaultOptions = {
   impr_2sg_neg: false,
   impr_neg: false,
   impr_pass: false,
-  impr_pass_neg: false
+  impr_pass_neg: false,
+  potn_1sg: false,
+  potn_2sg: false,
+  potn_3sg: false,
+  potn_1pl: false,
+  potn_2pl: false,
+  potn_3pl: false,
+  potn_neg: false,
+  potn_pass: false,
+  potn_pass_neg: false,
+  pres_part: false,
+  pres_pass_part: false,
+  past_part: false,
+  past_pass_part: false,
+  agnt_part: false,
+  nega_part: false,
+  inf1: true,
+  inf1_long: false,
+  inf2: false,
+  inf2_pass: false,
+  inf3: false,
+  inf3_pass: false,
+  inf4: false,
+  inf5: false
 };
 
 // load options and then render the popup
