@@ -151,8 +151,15 @@ export const getExpandedKeys = isVerb => {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.get(defaultOptions, savedOptions => {
       try {
-        console.log(savedOptions[field]);
-        resolve(savedOptions[field]);
+        const expandedKeys = [];
+
+        Object.keys(savedOptions[field]).forEach(key => {
+          if (savedOptions[field][key] === true) {
+            expandedKeys.push(key);
+          }
+        });
+
+        resolve(expandedKeys);
       } catch (error) {
         reject(error);
       }
