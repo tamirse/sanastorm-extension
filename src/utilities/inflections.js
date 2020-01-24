@@ -28,6 +28,23 @@ export const INSTRUCTIVE_PLURAL = "pl_instructive";
 export const ABESSIVE_PLURAL = "pl_abessive";
 export const COMITATIVE_PLURAL = "pl_comitative";
 
+export const sortedNonVerbInflectionList = [
+  NOMINATIVE,
+  GENITIVE,
+  PARTITIVE,
+  INESSIVE,
+  ELATIVE,
+  ILLATIVE,
+  ADESSIVE,
+  ABLATIVE,
+  ALLATIVE,
+  ESSIVE,
+  TRANSLATIVE,
+  ABESSIVE,
+  INSTRUCTIVE,
+  COMITATIVE
+];
+
 // VERBS
 export const INFINITIVE = "inf1";
 export const INFINITIVE_2 = "inf2";
@@ -39,6 +56,20 @@ export const PASSIVE = "pres_pass";
 export const PRESENT_1ST_SINGULAR = "pres_1sg";
 export const PAST_1ST_SINGULAR = "past_1sg";
 export const CONDITIONAL_1ST_SINGULAR = "cond_1sg";
+
+// TODO complete list
+export const sortedVerbInflections = [
+  INFINITIVE,
+  INFINITIVE_2,
+  INFINITIVE_3,
+  INFINITIVE_4,
+  INFINITIVE_5,
+  IMPERATIVE,
+  PASSIVE,
+  PRESENT_1ST_SINGULAR,
+  PAST_1ST_SINGULAR,
+  CONDITIONAL_1ST_SINGULAR
+];
 
 /**
  * Map object between verb form code to descriptive string
@@ -167,37 +198,38 @@ export const getExpandedKeys = isVerb => {
   });
 };
 
-export const EXPANDED_KEYS = {
-  nouns: [
-    NOMINATIVE,
-    GENITIVE,
-    PARTITIVE,
-    INESSIVE,
-    ELATIVE,
-    ILLATIVE,
-    ADESSIVE,
-    ABLATIVE,
-    ALLATIVE,
-    ESSIVE,
-    TRANSLATIVE,
-    INSTRUCTIVE,
-    ABESSIVE,
-    COMITATIVE
-  ],
-  verbs: [
-    INFINITIVE,
-    INFINITIVE_2,
-    INFINITIVE_3,
-    INFINITIVE_4,
-    INFINITIVE_5,
-    IMPERATIVE,
-    PASSIVE,
-    PRESENT_1ST_SINGULAR,
-    PAST_1ST_SINGULAR,
-    CONDITIONAL_1ST_SINGULAR
-  ]
+/**
+ * sorts the inflections array according to the verbInflectionsList / nonVerbInflectionList arrays
+ * @param {boolean} isVerb
+ * @param {array} inflections
+ */
+export const orderInflections = (isVerb, inflections) => {
+  const referenceList = isVerb
+    ? sortedVerbInflections
+    : sortedNonVerbInflectionList;
+
+  // TODO can be optimized by using obj instead of array
+  const compareNounsFunction = (inflectionA, inflectionB) => {
+    if (
+      referenceList.indexOf(inflectionA) < referenceList.indexOf(inflectionB)
+    ) {
+      return -1;
+    } else if (
+      referenceList.indexOf(inflectionA) > referenceList.indexOf(inflectionB)
+    ) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
+
+  return inflections.sort(compareNounsFunction);
 };
 
+/**
+ * the default options for displaying each case / conjugation
+ * and form marked as true will appear check in the popup
+ */
 export const defaultOptions = {
   verbs: {
     pres_1sg: true,
