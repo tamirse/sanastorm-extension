@@ -16,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "zip": "zip sanastorm.zip manifest.json -r src images dist"
+    "zip": "zip sanastorm.zip manifest.json popup.html images dist"
   },
   "eslintConfig": {
     "extends": "react-app"
