@@ -108,6 +108,7 @@ class App extends Component {
 
   fetchResource(input, init) {
     return new Promise((resolve, reject) => {
+      // eslint-disable-next-line no-undef
       chrome.runtime.sendMessage({ input, init }, messageResponse => {
         resolve(messageResponse);
       });
@@ -145,6 +146,9 @@ class App extends Component {
   }
 
   buttonClickedHandler = () => {
+    // eslint-disable-next-line no-undef
+    chrome.runtime.sendMessage({ action: "send", page: "infoContainer" }); // google analytics tracking
+
     let coords = utilities.getSelectionPosition(this.state.selectedElement);
 
     this.getWordData().then(data => {

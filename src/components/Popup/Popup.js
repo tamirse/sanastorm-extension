@@ -5,7 +5,10 @@ import "./Popup.css";
 import * as inflections from "../../utilities/inflections";
 import Expand from "../UI/Expand/Expand";
 import CheckboxSection from "./CheckboxSection/CheckboxSection";
+import googleAnalyticsTrackPage from "../../analitycs";
 
+// some informative console logs
+// eslint-disable-next-line no-undef
 chrome.storage.onChanged.addListener(function(changes, namespace) {
   for (var key in changes) {
     var storageChange = changes[key];
@@ -21,8 +24,8 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 });
 
 const Popup = props => {
-  // add disable icon
-  // add 'return to default'
+  // TODO add disable icon
+  // TODO add 'return to default'
   const [options, setOptions] = useState(props.options);
 
   return (
@@ -135,6 +138,9 @@ const Popup = props => {
 
 // load options and then render the popup
 chrome.storage.sync.get(inflections.defaultOptions, savedOptions => {
+  // google analytics track page
+  googleAnalyticsTrackPage("popup");
+
   // render Popup in the popup container
   // this file is loaded in popup.html, that's how it recognizes 'document'
   let popupContainer = document.getElementById("sanastorm-popup");
