@@ -54,6 +54,7 @@ class InfoContainer extends Component {
       >
         <img
           className={utilities.CONTAINER_CLASS}
+          // eslint-disable-next-line no-undef
           src={chrome.runtime.getURL("images/wikt.png")}
           alt="link to wiktionary"
         ></img>

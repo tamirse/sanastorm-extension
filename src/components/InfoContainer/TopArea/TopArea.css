@@ -4,6 +4,13 @@
 
 .sanastorm-english {
   padding-top: 5px;
+  display: flex;
+  flex-flow: column;
+}
+
+.sanastorm-english-word {
+  display: inline-flex;
+  margin: 2px 0;
 }
 
 .sanastorm-word-descriptions {

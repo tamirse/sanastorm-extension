@@ -173,13 +173,14 @@ export const nounCodeToDescription = code => {
 
 export const MINIMAL_KEYS = {
   nouns: [NOMINATIVE, GENITIVE, PARTITIVE, ILLATIVE],
-  verbs: [INFINITIVE, IMPERATIVE, PASSIVE]
+  verbs: [INFINITIVE]
 };
 
 export const getExpandedKeys = isVerb => {
   const field = isVerb ? "verbs" : "nouns";
 
   return new Promise((resolve, reject) => {
+    // eslint-disable-next-line no-undef
     chrome.storage.sync.get(defaultOptions, savedOptions => {
       try {
         const expandedKeys = [];

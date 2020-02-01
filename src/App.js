@@ -133,6 +133,7 @@ class App extends Component {
 
           if (res) {
             res = JSON.parse(res);
+
             if (Object.keys(res).length === 0) {
               resolve(noDataResponse);
             }

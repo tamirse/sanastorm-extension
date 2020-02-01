@@ -13,9 +13,11 @@ const InflectionArea = props => {
 
   useEffect(() => {
     inflections.getExpandedKeys(props.isVerb).then(expanded => {
+      // unite minimal inflections keys with expanded keys and remove duplicates
+      // we do this so that the minimal inflection could be displayed
       const inflectionsUnion = [
         ...new Set([...expanded, ...inflectionsListMinimal])
-      ]; // unite inflections and remove duplicates
+      ];
 
       setExpandedInflections(
         inflections.orderInflections(props.isVerb, inflectionsUnion)
@@ -23,7 +25,6 @@ const InflectionArea = props => {
     });
   }, [props.isVerb, inflectionsListMinimal]);
 
-  // TODO add minimal inflections to expanded so it will be visible
   // TODO set static inflection ordering
 
   return (
