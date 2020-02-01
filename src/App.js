@@ -127,7 +127,7 @@ class App extends Component {
               Alert: "No data, sorry!",
               Partitive: "No dataa, sorrya!"
             },
-            english: "No data, sorry!",
+            english: ["No data, sorry!"],
             noData: true
           };
 

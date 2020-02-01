@@ -83,6 +83,7 @@ class topArea extends Component {
           {this.props.wordEnglish.map((english, i) => (
             <div
               className={`sanastorm-english-word ${utilities.CONTAINER_CLASS}`}
+              key={i}
             >
               {i + 1}.
               <Textfit max={20} className={utilities.CONTAINER_CLASS}>
