@@ -64,38 +64,20 @@ class topArea extends Component {
             checked={this.props.pluralToggled}
           />
         )}
-        <div className={`sanastorm-title ${utilities.CONTAINER_CLASS}`}>
-          <div
-            className={`sanastorm-finnish-title ${utilities.CONTAINER_CLASS}`}
-          >
-            FINNISH
-          </div>
-          <div className={`sanastorm-title-text ${utilities.CONTAINER_CLASS}`}>
-            {finnishDisplayWord}
-          </div>
+        <div className="sanastorm-title">
+          <div className="sanastorm-finnish-title">FINNISH</div>
+          <div className="sanastorm-title-text">{finnishDisplayWord}</div>
         </div>
-        <div className={`sanastorm-english ${utilities.CONTAINER_CLASS}`}>
-          <div
-            className={`sanastorm-english-title ${utilities.CONTAINER_CLASS}`}
-          >
-            ENGLISH
-          </div>
+        <div className="sanastorm-english">
+          <div className="sanastorm-english-title">ENGLISH</div>
           {this.props.wordEnglish.map((english, i) => (
-            <div
-              className={`sanastorm-english-word ${utilities.CONTAINER_CLASS}`}
-              key={i}
-            >
-              {i + 1}.
-              <Textfit max={20} className={utilities.CONTAINER_CLASS}>
-                {english}
-              </Textfit>
+            <div className="sanastorm-english-word" key={i}>
+              {i + 1}.<Textfit max={20}>{english}</Textfit>
             </div>
           ))}
         </div>
         {this.props.noData ? null : (
-          <div
-            className={`sanastorm-word-descriptions ${utilities.CONTAINER_CLASS}`}
-          >
+          <div className="sanastorm-word-descriptions">
             {this.createWordDescriptions()}
           </div>
         )}

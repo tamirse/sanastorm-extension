@@ -1,7 +1,6 @@
 import * as inflections from "./inflections";
 
 const MAX_WORD_LEN = 61;
-const CONTAINER_CLASS = "sanastorm-ct";
 
 /**
  * return page text selection as string
@@ -58,7 +57,7 @@ const isSelectionValid = selection => {
  * return true iff target element is the info container
  */
 const isTargetInfoContainer = event => {
-  return event.target.classList.contains("sanastorm-ct");
+  return document.getElementById("sanastorm-container").contains(event.target);
 };
 
 /**
@@ -151,7 +150,6 @@ const isNounPlural = (selection, wordData) => {
 };
 
 export default {
-  CONTAINER_CLASS,
   getSelection,
   getSelectedElement,
   getSelectionPosition,

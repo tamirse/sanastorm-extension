@@ -44,7 +44,7 @@ class InfoContainer extends Component {
 
     let wiktLink = (
       <a
-        className={`sanastorm-wikt ${utilities.CONTAINER_CLASS}`}
+        className="sanastorm-wikt"
         href={
           "https://en.wiktionary.org/wiki/" +
           (word ? word : this.props.selectedText.toLowerCase())
@@ -53,7 +53,6 @@ class InfoContainer extends Component {
         rel="noopener noreferrer"
       >
         <img
-          className={utilities.CONTAINER_CLASS}
           // eslint-disable-next-line no-undef
           src={chrome.runtime.getURL("images/wikt.png")}
           alt="link to wiktionary"
@@ -62,37 +61,21 @@ class InfoContainer extends Component {
     );
 
     let expand = !this.state.expandedInflections ? (
-      <div
-        className={`sanastorm-expand ${utilities.CONTAINER_CLASS}`}
-        onClick={this.toggleInflections}
-      >
-        <div className={`sanastorm-expand-text ${utilities.CONTAINER_CLASS}`}>
-          MORE
-        </div>
-        <div
-          className={`sanastorm-arrow sanastorm-arrow-more ${utilities.CONTAINER_CLASS}`}
-        ></div>
+      <div className="sanastorm-expand" onClick={this.toggleInflections}>
+        <div className="sanastorm-expand-text">MORE</div>
+        <div className="sanastorm-arrow sanastorm-arrow-more"></div>
       </div>
     ) : (
-      <div
-        className={`sanastorm-expand ${utilities.CONTAINER_CLASS}`}
-        onClick={this.toggleInflections}
-      >
-        <div className={`sanastorm-expand-text ${utilities.CONTAINER_CLASS}`}>
-          LESS
-        </div>
-        <div
-          className={`sanastorm-arrow sanastorm-arrow-less ${utilities.CONTAINER_CLASS}`}
-        ></div>
+      <div className="sanastorm-expand" onClick={this.toggleInflections}>
+        <div className="sanastorm-expand-text">LESS</div>
+        <div className="sanastorm-arrow sanastorm-arrow-less"></div>
       </div>
     );
 
     let container = (
       <div
         id="sanastorm-info-container"
-        className={`${utilities.CONTAINER_CLASS} ${
-          this.state.expandedInflections ? "expanded" : ""
-        }`}
+        className={this.state.expandedInflections ? "expanded" : ""}
         style={{
           position: "absolute",
           left:
@@ -103,7 +86,7 @@ class InfoContainer extends Component {
           height: HEIGHT
         }}
       >
-        <div id="sanastorm-text" className={utilities.CONTAINER_CLASS}>
+        <div id="sanastorm-text">
           <TopArea
             isVerb={this.isVerb()}
             pluralToggled={this.state.pluralToggled}
@@ -115,7 +98,7 @@ class InfoContainer extends Component {
             noData={this.props.noData}
             partOfSpeech={this.props.partOfSpeech}
           />
-          <hr className={utilities.CONTAINER_CLASS}></hr>
+          <hr></hr>
           {this.props.noData ? null : (
             <InflectionArea
               isVerb={this.isVerb()}
@@ -126,7 +109,7 @@ class InfoContainer extends Component {
             />
           )}
         </div>
-        <div className={`sanastorm-footer ${utilities.CONTAINER_CLASS}`}>
+        <div className="sanastorm-footer">
           {expand}
           {wiktLink}
         </div>

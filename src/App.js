@@ -40,9 +40,8 @@ class App extends Component {
       let selectedElement = utilities.getSelectedElement();
 
       if (selection && !utilities.isTargetInfoContainer(event)) {
-        // we save the selection object
-        // because the selection may disappear, and we need to extract
-        // the selection position from the selection object
+        // we save the selection object because the selection may disappear,
+        // and we need to extract the selection position from the selection object
         this.setState({
           selectedText: selection,
           selectedElement: selectedElement

@@ -15,13 +15,7 @@ const wordDescription = props => {
     return null;
   }
 
-  return (
-    <div
-      className={`sanastorm-description ${classes} ${utilities.CONTAINER_CLASS}`}
-    >
-      {props.description}
-    </div>
-  );
+  return <div className="sanastorm-description">{props.description}</div>;
 };
 
 wordDescription.propTypes = {

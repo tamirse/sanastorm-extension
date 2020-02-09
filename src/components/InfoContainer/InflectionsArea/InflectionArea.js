@@ -28,7 +28,7 @@ const InflectionArea = props => {
   // TODO set static inflection ordering
 
   return (
-    <div id="sanastorm-inflections" className={utilities.CONTAINER_CLASS}>
+    <div id="sanastorm-inflections">
       {expandedInflections ? (
         expandedInflections.map(inflection => {
           // check if inflection is in minimal list
@@ -51,13 +51,13 @@ const InflectionArea = props => {
                   inflection === props.currentInflection
                     ? "sanastorm-selected"
                     : ""
-                } ${utilities.CONTAINER_CLASS}`}
+                }`}
                 key={inflection}
               >
                 <div
                   className={`sanastorm-inflection-type ${
                     props.isVerb ? "verb" : ""
-                  } ${utilities.CONTAINER_CLASS}`}
+                  }`}
                 >
                   {props.isVerb
                     ? inflections.verbCodeToDescription(inflection)
@@ -66,7 +66,7 @@ const InflectionArea = props => {
                 <div
                   className={`sanastorm-inflection-value ${
                     props.isVerb ? "verb" : ""
-                  } ${utilities.CONTAINER_CLASS}`}
+                  }`}
                 >
                   {props.wordData[inflection]
                     ? utilities.csvToNewlines(props.wordData[inflection])
