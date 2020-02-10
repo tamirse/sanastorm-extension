@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import "./WordDescription.css";
-import utilities from "../../../utilities/utilities";
 
 const wordDescription = props => {
   let classes = props.classes.toString().replace(/,/g, " ");
@@ -15,7 +14,11 @@ const wordDescription = props => {
     return null;
   }
 
-  return <div className="sanastorm-description">{props.description}</div>;
+  return (
+    <div className={`sanastorm-description ${classes}`}>
+      {props.description}
+    </div>
+  );
 };
 
 wordDescription.propTypes = {
