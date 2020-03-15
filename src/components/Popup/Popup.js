@@ -31,6 +31,9 @@ const Popup = props => {
   return (
     <Fragment>
       <div className="popup-title">SANASTORM</div>
+      <div className="description">
+        Choose what to display in the info popup
+      </div>
       <div className="sanastorm-options">
         <Expand title="Verb Display Options">
           <div className="verb-options">

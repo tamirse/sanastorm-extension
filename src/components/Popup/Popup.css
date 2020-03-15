@@ -11,8 +11,12 @@
   font-size: 11px;
 }
 
+.description {
+  padding: 10px;
+}
+
 .sanastorm-options {
-  padding: 5px 0;
+  padding: 0 0 5px 0;
 }
 
 .verb-options,
