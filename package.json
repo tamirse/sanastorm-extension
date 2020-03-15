@@ -3,20 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "archiver": "^3.1.1",
     "babel-cli": "^6.26.0",
     "babel-preset-react-app": "^3.1.2",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-scripts": "3.2.0",
+    "react-scripts": "^3.3.1",
     "react-textfit": "^1.1.0"
   },
   "scripts": {
     "start": "npx webpack --mode=development --watch",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject",
-    "zip": "zip sanastorm.zip manifest.json popup.html images dist"
+    "zip": "node zip.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -34,9 +35,11 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.7.7",
-    "@babel/preset-env": "^7.7.7",
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.7.4",
+    "@testing-library/react": "^9.4.0",
+    "babel-jest": "^25.1.0",
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.0.5",
     "css-loader": "^3.2.1",

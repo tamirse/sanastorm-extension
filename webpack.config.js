@@ -3,7 +3,6 @@ const CopyPlugin = require("copy-webpack-plugin");
 const ExtensionReloader = require("webpack-extension-reloader");
 
 module.exports = {
-  //mode: "development", // add --mode=development flag in cli command instead
   devtool: "cheap-module-source-map", // this avoids using eval (not allowed in extensions)
   entry: {
     contentScript: "./src/index.js",
