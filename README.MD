@@ -1,7 +1,6 @@
 ## SANASTORM
 
 This chrome extension displays cases, conjugations and translations of selected finnish words.
----
 
 ## Download & Install
 To install the extension on the browser [go to the web store](https://chrome.google.com/webstore/detail/jfbkejnfndcehkilemfmmpjjdceefghe/publish-accepted)
