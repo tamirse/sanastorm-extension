@@ -184,7 +184,6 @@ export const getExpandedKeys = isVerb => {
     chrome.storage.sync.get(defaultOptions, savedOptions => {
       try {
         const expandedKeys = [];
-
         Object.keys(savedOptions[field]).forEach(key => {
           if (savedOptions[field][key] === true) {
             expandedKeys.push(key);

@@ -33,7 +33,7 @@ class App extends Component {
       }
     };
 
-    // bind functionality to document.onmouseup
+    // bind functionality to document.onmouseup to get selection
     document.onmouseup = event => {
       // get text selection
       let selection = utilities.getSelection();
