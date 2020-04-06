@@ -1,6 +1,6 @@
 #sanastorm-info-container {
   box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px;
-  position: relative;
+  position: absolute;
   background: white;
   z-index: 50000 !important;
   border-width: 1px;
