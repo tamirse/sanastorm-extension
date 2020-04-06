@@ -1,123 +1,158 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
+import clsx from "clsx";
+import { makeStyles } from "@material-ui/core/styles";
 
 import utilities from "../../utilities/utilities";
 import InflectionArea from "./InflectionsArea/InflectionArea";
 import TopArea from "./TopArea/TopArea";
 import "./InfoContainer.css";
 
-const WIDTH = 260;
-const HEIGHT = "auto";
+const DEFAULT_WIDTH = 260;
 
-class InfoContainer extends Component {
-  state = {
-    expandedInflections: false,
-    pluralToggled: this.props.isPlural
-  };
+const isVerb = (props) => {
+  return (
+    props.partOfSpeech === "verb" || props.partOfSpeech === "auxiliary verb"
+  );
+};
 
-  toggleInflections = () => {
-    this.setState((prev, props) => ({
-      expandedInflections: !prev.expandedInflections
-    }));
-  };
+const calculateWidth = (props) => {
+  const ADDED_VERB_WIDTH = 90;
 
-  togglePlural = () => {
-    this.setState((prev, props) => ({
-      pluralToggled: !prev.pluralToggled
-    }));
-  };
+  return (
+    DEFAULT_WIDTH +
+    props.selectedText.length * 2 +
+    (isVerb(props) ? ADDED_VERB_WIDTH : 0)
+  );
+};
 
-  isVerb() {
-    return (
-      this.props.partOfSpeech === "verb" ||
-      this.props.partOfSpeech === "auxiliary verb"
-    );
+const calculateXPosition = (props) => {
+  const width = calculateWidth(props);
+  const padding = 16;
+  const viewportWidth = document.documentElement.clientWidth;
+
+  let xPosition = props.coords.x - Math.abs(width - props.coords.width) / 2;
+
+  console.log("coord", props.coords.x);
+  console.log("width: ", width);
+  console.log("xPosition: ", xPosition);
+  console.log("window width: ", window.innerWidth);
+  console.log("xpos+width+pad", xPosition + width + padding);
+  console.log("difference:", window.innerWidth - width - padding);
+
+  // if xPosition is outside viewport, change it to fit inside
+  if (xPosition <= 0) {
+    // xpos is outside left side
+    xPosition = padding;
+  }
+  if (xPosition + width + padding * 2 >= viewportWidth) {
+    // xpos is outside right side
+    console.log("outside");
+    xPosition = viewportWidth - width - padding * 3;
   }
 
-  calculateWidth() {
-    return (
-      WIDTH + this.props.selectedText.length * 2 + (this.isVerb() ? 90 : 0)
-    );
-  }
+  return xPosition;
+};
 
-  render() {
-    let word = utilities.getWordNominativeOrInfinitive(this.props.wordData);
+const useStyles = makeStyles({
+  infoContainer: (props) => ({
+    defaultWidth: DEFAULT_WIDTH,
+    height: "auto",
+    width: calculateWidth(props),
+    left: calculateXPosition(props),
+    top: props.coords.y + 12,
+  }),
+});
 
-    let wiktLink = (
-      <a
-        className="sanastorm-wikt"
-        href={
-          "https://en.wiktionary.org/wiki/" +
-          (word ? word : this.props.selectedText.toLowerCase())
-        }
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          // eslint-disable-next-line no-undef
-          src={chrome.runtime.getURL("images/wikt.png")}
-          alt="link to wiktionary"
-        ></img>
-      </a>
-    );
+const InfoContainer = (props) => {
+  const classes = useStyles(props);
 
-    let expand = !this.state.expandedInflections ? (
-      <div className="sanastorm-expand" onClick={this.toggleInflections}>
-        <div className="sanastorm-expand-text">MORE</div>
-        <div className="sanastorm-arrow sanastorm-arrow-more"></div>
-      </div>
-    ) : (
-      <div className="sanastorm-expand" onClick={this.toggleInflections}>
-        <div className="sanastorm-expand-text">LESS</div>
-        <div className="sanastorm-arrow sanastorm-arrow-less"></div>
-      </div>
-    );
+  const [expandedInflections, setExpandedInflections] = useState(false);
+  const [pluralToggled, setPluralToggled] = useState(props.isPlural);
 
-    let container = (
-      <div
-        id="sanastorm-info-container"
-        className={this.state.expandedInflections ? "expanded" : ""}
-        style={{
-          position: "absolute",
-          left:
-            this.props.coords.x -
-            Math.abs(this.calculateWidth() - this.props.coords.width) / 2,
-          top: this.props.coords.y + 12,
-          width: this.calculateWidth(),
-          height: HEIGHT
-        }}
-      >
-        <div id="sanastorm-text">
-          <TopArea
-            isVerb={this.isVerb()}
-            pluralToggled={this.state.pluralToggled}
-            togglePlural={this.togglePlural}
-            currentInflection={this.props.currentInflection}
-            wordData={this.props.wordData}
-            selectedText={this.props.selectedText}
-            wordEnglish={this.props.wordEnglish}
-            noData={this.props.noData}
-            partOfSpeech={this.props.partOfSpeech}
+  // update pluralToggled state based on props
+  useEffect(() => {
+    setPluralToggled(props.isPlural);
+  }, [props.isPlural]);
+
+  const toggleInflections = () => {
+    setExpandedInflections(!expandedInflections);
+  };
+
+  const togglePlural = () => {
+    setPluralToggled(!pluralToggled);
+  };
+
+  let word = utilities.getWordNominativeOrInfinitive(props.wordData);
+
+  let wiktLink = (
+    <a
+      className="sanastorm-wikt"
+      href={
+        "https://en.wiktionary.org/wiki/" +
+        (word ? word : props.selectedText.toLowerCase())
+      }
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img
+        // eslint-disable-next-line no-undef
+        src={chrome.runtime.getURL("images/wikt.png")}
+        alt="link to wiktionary"
+      ></img>
+    </a>
+  );
+
+  let expand = !expandedInflections ? (
+    <div className="sanastorm-expand" onClick={toggleInflections}>
+      <div className="sanastorm-expand-text">MORE</div>
+      <div className="sanastorm-arrow sanastorm-arrow-more"></div>
+    </div>
+  ) : (
+    <div className="sanastorm-expand" onClick={toggleInflections}>
+      <div className="sanastorm-expand-text">LESS</div>
+      <div className="sanastorm-arrow sanastorm-arrow-less"></div>
+    </div>
+  );
+
+  let container = (
+    <div
+      id="sanastorm-info-container"
+      className={clsx(
+        classes.infoContainer,
+        expandedInflections ? "expanded" : ""
+      )}
+    >
+      <div id="sanastorm-text">
+        <TopArea
+          isVerb={isVerb(props)}
+          pluralToggled={pluralToggled}
+          togglePlural={togglePlural}
+          currentInflection={props.currentInflection}
+          wordData={props.wordData}
+          selectedText={props.selectedText}
+          wordEnglish={props.wordEnglish}
+          noData={props.noData}
+          partOfSpeech={props.partOfSpeech}
+        />
+        <hr></hr>
+        {props.noData ? null : (
+          <InflectionArea
+            isVerb={isVerb(props)}
+            pluralToggled={pluralToggled}
+            expandedInflections={expandedInflections}
+            currentInflection={props.currentInflection}
+            wordData={props.wordData}
           />
-          <hr></hr>
-          {this.props.noData ? null : (
-            <InflectionArea
-              isVerb={this.isVerb()}
-              pluralToggled={this.state.pluralToggled}
-              expandedInflections={this.state.expandedInflections}
-              currentInflection={this.props.currentInflection}
-              wordData={this.props.wordData}
-            />
-          )}
-        </div>
-        <div className="sanastorm-footer">
-          {expand}
-          {wiktLink}
-        </div>
+        )}
       </div>
-    );
+      <div className="sanastorm-footer">
+        {expand}
+        {wiktLink}
+      </div>
+    </div>
+  );
 
-    return container;
-  }
-}
+  return container;
+};
 
 export default InfoContainer;
