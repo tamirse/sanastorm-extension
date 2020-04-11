@@ -32,13 +32,6 @@ const calculateXPosition = (props) => {
 
   let xPosition = props.coords.x - Math.abs(width - props.coords.width) / 2;
 
-  console.log("coord", props.coords.x);
-  console.log("width: ", width);
-  console.log("xPosition: ", xPosition);
-  console.log("window width: ", window.innerWidth);
-  console.log("xpos+width+pad", xPosition + width + padding);
-  console.log("difference:", window.innerWidth - width - padding);
-
   // if xPosition is outside viewport, change it to fit inside
   if (xPosition <= 0) {
     // xpos is outside left side
@@ -46,21 +39,77 @@ const calculateXPosition = (props) => {
   }
   if (xPosition + width + padding * 2 >= viewportWidth) {
     // xpos is outside right side
-    console.log("outside");
     xPosition = viewportWidth - width - padding * 3;
   }
 
   return xPosition;
 };
 
+const calculateYPosition = (props) => {
+  const viewportHeight = document.documentElement.clientHeight;
+  let yPosition = props.coords.y;
+  const PADDING = 12;
+
+  if (shouldContainerBeAtBottom(props)) {
+    return viewportHeight - yPosition + PADDING * 2;
+  } else {
+    return yPosition + PADDING;
+  }
+};
+
+const shouldContainerBeAtBottom = (props) => {
+  const viewportHeight = document.documentElement.clientHeight;
+  let yPosition = props.coords.clientY; // get y position relative to the viewport
+
+  // return true iff yPos is at bottom half of viewport
+  return yPosition >= viewportHeight / 2;
+};
+
 const useStyles = makeStyles({
-  infoContainer: (props) => ({
-    defaultWidth: DEFAULT_WIDTH,
-    height: "auto",
-    width: calculateWidth(props),
-    left: calculateXPosition(props),
-    top: props.coords.y + 12,
-  }),
+  infoContainer: (props) => {
+    const styleObj = {
+      defaultWidth: DEFAULT_WIDTH,
+      height: "auto",
+      width: calculateWidth(props),
+      left: calculateXPosition(props),
+      "&:before, &:after": {
+        left: "50%",
+        border: "solid transparent",
+        content: " ",
+        height: 0,
+        width: 0,
+        position: "absolute",
+        pointerEvents: "none",
+      },
+      "&:before": {
+        borderColor: "rgba(140, 140, 140, 0)",
+        borderWidth: 8,
+        marginLeft: "-8px",
+      },
+      "&:after": {
+        borderColor: "rgba(255, 255, 255, 0)",
+        borderWidth: 7,
+        marginLeft: "-7px",
+      },
+    };
+
+    // if container is below viewport, display it above the selection
+    // also, place the arrow at the bottom of container
+    if (shouldContainerBeAtBottom(props)) {
+      styleObj.bottom = calculateYPosition(props);
+      styleObj["&:before, &:after"].top = "100%";
+      styleObj["&:before"].borderTopColor = "#8c8c8c";
+      styleObj["&:after"].borderTopColor = "#ffffff";
+    } else {
+      styleObj.top = calculateYPosition(props);
+      styleObj["&:before, &:after"].bottom = "100%";
+      styleObj["&:before"].borderBottomColor = "#8c8c8c";
+      styleObj["&:after"].borderBottomColor = "#ffffff";
+    }
+
+    console.log(styleObj);
+    return styleObj;
+  },
 });
 
 const InfoContainer = (props) => {

@@ -11,30 +11,30 @@ class App extends Component {
     selectedText: "",
     selectedElement: null,
     buttonCoords: { x: 0, y: 0 },
-    infoContainerCoords: { x: 0, y: 0 },
+    infoContainerCoords: { x: 0, y: 0, viewportY: 0 },
     wordData: null,
     wordEnglish: null,
     partOfSpeech: null,
-    noData: false
+    noData: false,
   };
 
   componentDidMount() {
     // bind functionality to document.onmousedown
     // if selection already exists when pressing mouse button, don't display sanastorm button
-    document.onmousedown = event => {
+    document.onmousedown = (event) => {
       let selection = utilities.getSelection();
 
       if (selection && !utilities.isTargetSanastormButton(event)) {
         this.hideButton();
       } else if (selection && utilities.isTargetSanastormButton(event)) {
-        this.buttonClickedHandler();
+        this.buttonClickedHandler(event);
       } else if (!selection) {
         this.hideButton();
       }
     };
 
     // bind functionality to document.onmouseup to get selection
-    document.onmouseup = event => {
+    document.onmouseup = (event) => {
       // get text selection
       let selection = utilities.getSelection();
       let selectedElement = utilities.getSelectedElement();
@@ -44,7 +44,7 @@ class App extends Component {
         // and we need to extract the selection position from the selection object
         this.setState({
           selectedText: selection,
-          selectedElement: selectedElement
+          selectedElement: selectedElement,
         });
 
         if (
@@ -82,7 +82,7 @@ class App extends Component {
 
   setButtonCoordinates(x, y) {
     this.setState({
-      buttonCoords: { x: x, y: y }
+      buttonCoords: { x: x, y: y },
     });
   }
 
@@ -108,7 +108,7 @@ class App extends Component {
   fetchResource(input, init) {
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line no-undef
-      chrome.runtime.sendMessage({ input, init }, messageResponse => {
+      chrome.runtime.sendMessage({ input, init }, (messageResponse) => {
         resolve(messageResponse);
       });
     });
@@ -120,14 +120,14 @@ class App extends Component {
 
     return new Promise((resolve, reject) => {
       this.fetchResource(baseURL + word)
-        .then(res => {
+        .then((res) => {
           let noDataResponse = {
             inflections: {
               Alert: "No data, sorry!",
-              Partitive: "No dataa, sorrya!"
+              Partitive: "No dataa, sorrya!",
             },
             english: ["No data, sorry!"],
-            noData: true
+            noData: true,
           };
 
           if (res) {
@@ -141,17 +141,20 @@ class App extends Component {
             resolve(noDataResponse);
           }
         })
-        .catch(e => console.log(e));
+        .catch((e) => console.log(e));
     });
   }
 
-  buttonClickedHandler = () => {
+  buttonClickedHandler = (event) => {
     // eslint-disable-next-line no-undef
     chrome.runtime.sendMessage({ action: "send", page: "infoContainer" }); // google analytics tracking
 
-    let coords = utilities.getSelectionPosition(this.state.selectedElement);
+    let coords = utilities.getSelectionPosition(
+      this.state.selectedElement,
+      event
+    );
 
-    this.getWordData().then(data => {
+    this.getWordData().then((data) => {
       let partOfSpeech = data.partOfSpeech;
 
       if (data["omorfi"] !== undefined) {
@@ -167,7 +170,7 @@ class App extends Component {
         wordData: data.inflections,
         wordEnglish: data.english ? data.english : "-",
         partOfSpeech: partOfSpeech,
-        noData: data.noData
+        noData: data.noData,
       });
     });
   };

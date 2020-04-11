@@ -6,10 +6,7 @@ const MAX_WORD_LEN = 61;
  * return page text selection as string
  */
 const getSelection = () => {
-  return document
-    .getSelection()
-    .toString()
-    .trim();
+  return document.getSelection().toString().trim();
 };
 
 /**
@@ -24,15 +21,17 @@ const getSelectedElement = () => {
  * x,y coordinates
  * selection width and height
  */
-const getSelectionPosition = selectedElement => {
+const getSelectionPosition = (selectedElement, event) => {
   const range = selectedElement.getRangeAt(0);
   const domRect = range.getClientRects()[0]; // contains the borders of the selection
 
   return {
     x: domRect.left,
     y: domRect.bottom + window.scrollY,
+    clientX: event.clientX,
+    clientY: event.clientY,
     width: domRect.width,
-    height: domRect.height
+    height: domRect.height,
   };
 };
 
@@ -40,7 +39,7 @@ const getSelectionPosition = selectedElement => {
  * return true iff selection is valid, ie no space/newline between characters
  * @param {string} selection
  */
-const isSelectionValid = selection => {
+const isSelectionValid = (selection) => {
   if (
     selection === "" ||
     selection.length > MAX_WORD_LEN ||
@@ -56,14 +55,14 @@ const isSelectionValid = selection => {
 /**
  * return true iff target element is the info container
  */
-const isTargetInfoContainer = event => {
+const isTargetInfoContainer = (event) => {
   return document.getElementById("sanastorm-container").contains(event.target);
 };
 
 /**
  * return true iff target element is the sanastorm button
  */
-const isTargetSanastormButton = event => {
+const isTargetSanastormButton = (event) => {
   return event.target.classList.contains("sanastorm-icon");
 };
 
@@ -71,7 +70,7 @@ const isTargetSanastormButton = event => {
  * return the words' nominative or infinitive value
  * @param {object} wordData
  */
-const getWordNominativeOrInfinitive = wordData => {
+const getWordNominativeOrInfinitive = (wordData) => {
   let word = null;
 
   if (wordData) {
@@ -89,7 +88,7 @@ const getWordNominativeOrInfinitive = wordData => {
  * replaces commas with newlines
  * @param {string} string
  */
-const csvToNewlines = string => {
+const csvToNewlines = (string) => {
   return string.replace(/,/g, ",\n");
 };
 
@@ -97,7 +96,7 @@ const csvToNewlines = string => {
  * does the word contain the -ko/-kö suffix
  * @param {string} word
  */
-const isWordQuestionSuffix = word => {
+const isWordQuestionSuffix = (word) => {
   let suffix1 = "ko";
   let suffix2 = "kö";
   let wordLen = word.length;
@@ -112,7 +111,7 @@ const isWordQuestionSuffix = word => {
  * if the question has the -ko/-kö suffix, remove it
  * @param {string} word
  */
-const removeQuestionSuffix = word => {
+const removeQuestionSuffix = (word) => {
   if (isWordQuestionSuffix(word)) {
     return word.substr(0, word.length - 2);
   }
@@ -126,7 +125,7 @@ const removeQuestionSuffix = word => {
 const getSelectedWordInflection = (selection, wordData) => {
   let selectedWordInflection = null;
 
-  Object.keys(wordData).forEach(inflection => {
+  Object.keys(wordData).forEach((inflection) => {
     if (wordData[inflection] === selection.toLowerCase()) {
       selectedWordInflection = inflection;
     }
@@ -161,5 +160,5 @@ export default {
   isWordQuestionSuffix,
   removeQuestionSuffix,
   getSelectedWordInflection,
-  isNounPlural
+  isNounPlural,
 };
