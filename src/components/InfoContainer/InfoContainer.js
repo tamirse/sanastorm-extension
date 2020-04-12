@@ -8,6 +8,8 @@ import TopArea from "./TopArea/TopArea";
 import "./InfoContainer.css";
 
 const DEFAULT_WIDTH = 260;
+const OUTSIDE_VIEWPORT_LEFT = -1;
+const OUTSIDE_VIEWPORT_RIGHT = 1;
 
 const isVerb = (props) => {
   return (
@@ -33,11 +35,11 @@ const calculateXPosition = (props) => {
   let xPosition = props.coords.x - Math.abs(width - props.coords.width) / 2;
 
   // if xPosition is outside viewport, change it to fit inside
-  if (xPosition <= 0) {
+  if (isContainerOutsideXViewport(props) === OUTSIDE_VIEWPORT_LEFT) {
     // xpos is outside left side
     xPosition = padding;
   }
-  if (xPosition + width + padding * 2 >= viewportWidth) {
+  if (isContainerOutsideXViewport(props) === OUTSIDE_VIEWPORT_RIGHT) {
     // xpos is outside right side
     xPosition = viewportWidth - width - padding * 3;
   }
@@ -54,6 +56,25 @@ const calculateYPosition = (props) => {
     return viewportHeight - yPosition + PADDING * 2;
   } else {
     return yPosition + PADDING;
+  }
+};
+
+const isContainerOutsideXViewport = (props) => {
+  const width = calculateWidth(props);
+  const padding = 16;
+  const viewportWidth = document.documentElement.clientWidth;
+
+  let xPosition = props.coords.x - Math.abs(width - props.coords.width) / 2;
+
+  if (xPosition <= 0) {
+    // xpos is outside left side
+    return OUTSIDE_VIEWPORT_LEFT;
+  } else if (xPosition + width + padding * 2 >= viewportWidth) {
+    // xpos is outside right side
+    return OUTSIDE_VIEWPORT_RIGHT;
+  } else {
+    // xpos is inside viewport
+    return 0;
   }
 };
 
@@ -96,18 +117,29 @@ const useStyles = makeStyles({
     // if container is below viewport, display it above the selection
     // also, place the arrow at the bottom of container
     if (shouldContainerBeAtBottom(props)) {
+      // container y position
       styleObj.bottom = calculateYPosition(props);
+      // arrow position
       styleObj["&:before, &:after"].top = "100%";
       styleObj["&:before"].borderTopColor = "#8c8c8c";
       styleObj["&:after"].borderTopColor = "#ffffff";
     } else {
+      // container y position
       styleObj.top = calculateYPosition(props);
+      // arrow position
       styleObj["&:before, &:after"].bottom = "100%";
       styleObj["&:before"].borderBottomColor = "#8c8c8c";
       styleObj["&:after"].borderBottomColor = "#ffffff";
     }
 
-    console.log(styleObj);
+    // set arrow position if container is outside viewport
+    const isOutsideViewport = isContainerOutsideXViewport(props);
+    if (isOutsideViewport === OUTSIDE_VIEWPORT_LEFT) {
+      styleObj["&:before, &:after"].left = "10%";
+    } else if (isOutsideViewport === OUTSIDE_VIEWPORT_RIGHT) {
+      styleObj["&:before, &:after"].left = "90%";
+    }
+
     return styleObj;
   },
 });
