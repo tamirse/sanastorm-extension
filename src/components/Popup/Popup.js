@@ -9,12 +9,11 @@ import googleAnalyticsTrackPage from "../../analitycs";
 
 // some informative console logs
 // eslint-disable-next-line no-undef
-chrome.storage.onChanged.addListener(function(changes, namespace) {
+chrome.storage.onChanged.addListener(function (changes, namespace) {
   for (var key in changes) {
     var storageChange = changes[key];
     console.log(
-      'Storage key "%s" in namespace "%s" changed. ' +
-        'Old value was "%s", new value is "%s".',
+      'Storage key "%s" in namespace "%s" changed. ' + 'Old value was "%s", new value is "%s".',
       key,
       namespace,
       storageChange.oldValue,
@@ -23,7 +22,7 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
   }
 });
 
-const Popup = props => {
+const Popup = (props) => {
   // TODO add disable icon
   // TODO add 'return to default'
   const [options, setOptions] = useState(props.options);
@@ -31,9 +30,7 @@ const Popup = props => {
   return (
     <Fragment>
       <div className="popup-title">SANASTORM</div>
-      <div className="description">
-        Choose what to display in the info popup
-      </div>
+      <div className="description">Choose what to display in the info popup</div>
       <div className="sanastorm-options">
         <Expand title="Verb Display Options">
           <div className="verb-options">
@@ -70,12 +67,7 @@ const Popup = props => {
                 setOptions={setOptions}
                 singCodes={["impr_2sg", "impr_3sg"]}
                 plurCodes={["impr_1pl", "impr_2pl", "impr_3pl"]}
-                miscCodes={[
-                  "impr_2sg_neg",
-                  "impr_neg",
-                  "impr_pass",
-                  "impr_pass_neg"
-                ]}
+                miscCodes={["impr_2sg_neg", "impr_neg", "impr_pass", "impr_pass_neg"]}
               />
             </Expand>
             <Expand title="Potential mood">
@@ -126,7 +118,7 @@ const Popup = props => {
                 "translative",
                 "abessive",
                 "instructive",
-                "comitative"
+                "comitative",
               ]}
               plurCodes={[]}
               miscCodes={[]}
@@ -140,7 +132,7 @@ const Popup = props => {
 };
 
 // load options and then render the popup
-chrome.storage.sync.get(inflections.defaultOptions, savedOptions => {
+chrome.storage.sync.get(inflections.defaultOptions, (savedOptions) => {
   // google analytics track page
   googleAnalyticsTrackPage("popup");
 

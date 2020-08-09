@@ -15,13 +15,13 @@ class App extends Component {
     wordData: null,
     wordEnglish: null,
     partOfSpeech: null,
-    noData: false
+    noData: false,
   };
 
   componentDidMount() {
     // bind functionality to document.onmousedown
     // if selection already exists when pressing mouse button, don't display sanastorm button
-    document.onmousedown = event => {
+    document.onmousedown = (event) => {
       let selection = utilities.getSelection();
 
       if (selection && !utilities.isTargetSanastormButton(event)) {
@@ -34,7 +34,7 @@ class App extends Component {
     };
 
     // bind functionality to document.onmouseup to get selection
-    document.onmouseup = event => {
+    document.onmouseup = (event) => {
       // get text selection
       let selection = utilities.getSelection();
       let selectedElement = utilities.getSelectedElement();
@@ -44,14 +44,10 @@ class App extends Component {
         // and we need to extract the selection position from the selection object
         this.setState({
           selectedText: selection,
-          selectedElement: selectedElement
+          selectedElement: selectedElement,
         });
 
-        if (
-          selection &&
-          !this.state.showButton &&
-          utilities.isSelectionValid(selection)
-        ) {
+        if (selection && !this.state.showButton && utilities.isSelectionValid(selection)) {
           this.getAndSetButtonCoords(event); // set button coordinates (updates state)
           this.showButton();
         } else {
@@ -82,7 +78,7 @@ class App extends Component {
 
   setButtonCoordinates(x, y) {
     this.setState({
-      buttonCoords: { x: x, y: y }
+      buttonCoords: { x: x, y: y },
     });
   }
 
@@ -108,7 +104,7 @@ class App extends Component {
   fetchResource(input, init) {
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line no-undef
-      chrome.runtime.sendMessage({ input, init }, messageResponse => {
+      chrome.runtime.sendMessage({ input, init }, (messageResponse) => {
         resolve(messageResponse);
       });
     });
@@ -116,18 +112,19 @@ class App extends Component {
 
   getWordData() {
     let word = this.state.selectedText;
-    let baseURL = "http://3.125.249.95:3000/api/sana/";
+    // let baseURL = "http://3.125.249.95:3000/api/sana/";
+    let baseURL = "http://135.181.28.104:3000/api/sana/";
 
     return new Promise((resolve, reject) => {
       this.fetchResource(baseURL + word)
-        .then(res => {
+        .then((res) => {
           let noDataResponse = {
             inflections: {
               Alert: "No data, sorry!",
-              Partitive: "No dataa, sorrya!"
+              Partitive: "No dataa, sorrya!",
             },
             english: ["No data, sorry!"],
-            noData: true
+            noData: true,
           };
 
           if (res) {
@@ -141,7 +138,7 @@ class App extends Component {
             resolve(noDataResponse);
           }
         })
-        .catch(e => console.log(e));
+        .catch((e) => console.log(e));
     });
   }
 
@@ -151,7 +148,7 @@ class App extends Component {
 
     let coords = utilities.getSelectionPosition(this.state.selectedElement);
 
-    this.getWordData().then(data => {
+    this.getWordData().then((data) => {
       let partOfSpeech = data.partOfSpeech;
 
       if (data["omorfi"] !== undefined) {
@@ -167,7 +164,7 @@ class App extends Component {
         wordData: data.inflections,
         wordEnglish: data.english ? data.english : "-",
         partOfSpeech: partOfSpeech,
-        noData: data.noData
+        noData: data.noData,
       });
     });
   };
@@ -175,9 +172,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        {this.state.showButton ? (
-          <SanastormButton coords={this.state.buttonCoords} />
-        ) : null}
+        {this.state.showButton ? <SanastormButton coords={this.state.buttonCoords} /> : null}
         {this.state.showInfoContainer ? (
           <SanastormInfoContainer
             coords={this.state.infoContainerCoords}
@@ -190,10 +185,7 @@ class App extends Component {
               this.state.wordData
             )}
             noData={this.state.noData}
-            isPlural={utilities.isNounPlural(
-              this.state.selectedText,
-              this.state.wordData
-            )}
+            isPlural={utilities.isNounPlural(this.state.selectedText, this.state.wordData)}
           />
         ) : null}
       </Fragment>

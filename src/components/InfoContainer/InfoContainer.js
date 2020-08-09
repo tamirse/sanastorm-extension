@@ -11,43 +11,39 @@ const HEIGHT = "auto";
 class InfoContainer extends Component {
   state = {
     expandedInflections: false,
-    pluralToggled: this.props.isPlural
+    pluralToggled: this.props.isPlural,
   };
 
   toggleInflections = () => {
     this.setState((prev, props) => ({
-      expandedInflections: !prev.expandedInflections
+      expandedInflections: !prev.expandedInflections,
     }));
   };
 
   togglePlural = () => {
     this.setState((prev, props) => ({
-      pluralToggled: !prev.pluralToggled
+      pluralToggled: !prev.pluralToggled,
     }));
   };
 
   isVerb() {
-    return (
-      this.props.partOfSpeech === "verb" ||
-      this.props.partOfSpeech === "auxiliary verb"
-    );
+    return this.props.partOfSpeech === "verb" || this.props.partOfSpeech === "auxiliary verb";
   }
 
   calculateWidth() {
-    return (
-      WIDTH + this.props.selectedText.length * 2 + (this.isVerb() ? 90 : 0)
-    );
+    return WIDTH + this.props.selectedText.length * 2 + (this.isVerb() ? 90 : 0);
   }
 
   render() {
     let word = utilities.getWordNominativeOrInfinitive(this.props.wordData);
 
+    console.log(this.props.wordData);
+
     let wiktLink = (
       <a
         className="sanastorm-wikt"
         href={
-          "https://en.wiktionary.org/wiki/" +
-          (word ? word : this.props.selectedText.toLowerCase())
+          "https://en.wiktionary.org/wiki/" + (word ? word : this.props.selectedText.toLowerCase())
         }
         target="_blank"
         rel="noopener noreferrer"
@@ -78,12 +74,10 @@ class InfoContainer extends Component {
         className={this.state.expandedInflections ? "expanded" : ""}
         style={{
           position: "absolute",
-          left:
-            this.props.coords.x -
-            Math.abs(this.calculateWidth() - this.props.coords.width) / 2,
+          left: this.props.coords.x - Math.abs(this.calculateWidth() - this.props.coords.width) / 2,
           top: this.props.coords.y + 12,
           width: this.calculateWidth(),
-          height: HEIGHT
+          height: HEIGHT,
         }}
       >
         <div id="sanastorm-text">
