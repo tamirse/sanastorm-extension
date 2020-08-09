@@ -21,13 +21,15 @@ const getSelectedElement = () => {
  * x,y coordinates
  * selection width and height
  */
-const getSelectionPosition = (selectedElement) => {
+const getSelectionPosition = (selectedElement, event) => {
   const range = selectedElement.getRangeAt(0);
   const domRect = range.getClientRects()[0]; // contains the borders of the selection
 
   return {
     x: domRect.left,
     y: domRect.bottom + window.scrollY,
+    clientX: event.clientX,
+    clientY: event.clientY,
     width: domRect.width,
     height: domRect.height,
   };

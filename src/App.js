@@ -11,7 +11,7 @@ class App extends Component {
     selectedText: "",
     selectedElement: null,
     buttonCoords: { x: 0, y: 0 },
-    infoContainerCoords: { x: 0, y: 0 },
+    infoContainerCoords: { x: 0, y: 0, viewportY: 0 },
     wordData: null,
     wordEnglish: null,
     partOfSpeech: null,
@@ -27,7 +27,7 @@ class App extends Component {
       if (selection && !utilities.isTargetSanastormButton(event)) {
         this.hideButton();
       } else if (selection && utilities.isTargetSanastormButton(event)) {
-        this.buttonClickedHandler();
+        this.buttonClickedHandler(event);
       } else if (!selection) {
         this.hideButton();
       }
@@ -142,11 +142,14 @@ class App extends Component {
     });
   }
 
-  buttonClickedHandler = () => {
+  buttonClickedHandler = (event) => {
     // eslint-disable-next-line no-undef
     chrome.runtime.sendMessage({ action: "send", page: "infoContainer" }); // google analytics tracking
 
-    let coords = utilities.getSelectionPosition(this.state.selectedElement);
+    let coords = utilities.getSelectionPosition(
+      this.state.selectedElement,
+      event
+    );
 
     this.getWordData().then((data) => {
       let partOfSpeech = data.partOfSpeech;
